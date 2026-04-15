@@ -3,94 +3,80 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Pablo Martínez Bernal — Cybersecurity Leader</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+<title>Pablo Martínez Bernal — Consultor GRC · Ciberseguridad</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --navy:    #1a2744;
-  --navy2:   #243159;
-  --gold:    #b8965a;
-  --gold2:   #d4af7a;
-  --cream:   #f7f4ef;
-  --white:   #ffffff;
-  --text:    #2c2c2c;
-  --muted:   #7a7a7a;
-  --border:  #e0dbd2;
-  --shadow:  0 4px 24px rgba(26,39,68,0.08);
-  --shadow2: 0 8px 40px rgba(26,39,68,0.14);
+  --navy:   #0f1f3d;
+  --navy2:  #1a3260;
+  --accent: #1e5fa8;
+  --gold:   #c49a3c;
+  --cream:  #f9f7f4;
+  --white:  #ffffff;
+  --text:   #1a1a1a;
+  --muted:  #6b7280;
+  --border: #e5e7eb;
+  --light:  #f3f6fb;
 }
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 64px; }
 body {
   background: var(--white);
   color: var(--text);
-  font-family: 'Lato', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 300;
-  line-height: 1.75;
+  line-height: 1.7;
   overflow-x: hidden;
 }
-
-/* SCROLLBAR */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--cream); }
-::-webkit-scrollbar-thumb { background: var(--gold); }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--border); }
+::-webkit-scrollbar-thumb { background: var(--accent); }
 
 /* ── NAV ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(255,255,255,0.97);
+  background: rgba(255,255,255,0.96);
   border-bottom: 1px solid var(--border);
-  padding: 0 60px;
+  height: 64px;
   display: flex; align-items: center; justify-content: space-between;
-  height: 68px;
-  backdrop-filter: blur(8px);
+  padding: 0 64px;
+  backdrop-filter: blur(12px);
   transition: box-shadow 0.3s;
 }
-nav.scrolled { box-shadow: var(--shadow); }
-
+nav.scrolled { box-shadow: 0 2px 20px rgba(15,31,61,0.07); }
 .nav-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.25rem; font-weight: 700;
-  color: var(--navy); text-decoration: none;
-  letter-spacing: 0.5px;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.15rem; color: var(--navy);
+  text-decoration: none; letter-spacing: 0.2px;
 }
-.nav-logo span { color: var(--gold); }
-
-.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 32px; list-style: none; }
 .nav-links a {
-  font-size: 0.8rem; letter-spacing: 1.5px; text-transform: uppercase;
-  color: var(--muted); text-decoration: none;
-  transition: color 0.25s; font-weight: 400;
+  font-size: 0.75rem; letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; font-weight: 500;
+  transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--navy); }
-
 .nav-right { display: flex; align-items: center; gap: 20px; }
-
 .available-dot {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase;
-  color: #2e7d4f; font-weight: 400;
+  display: flex; align-items: center; gap: 7px;
+  font-size: 0.7rem; letter-spacing: 1.2px; text-transform: uppercase;
+  color: #16a34a; font-weight: 500;
 }
 .dot {
-  width: 8px; height: 8px; background: #2e7d4f;
-  border-radius: 50%; animation: pulse 2s infinite;
+  width: 7px; height: 7px; background: #16a34a;
+  border-radius: 50%; animation: pulse 2.5s infinite;
 }
 @keyframes pulse {
-  0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(46,125,79,0.4); }
-  50%      { opacity:0.7; box-shadow: 0 0 0 5px rgba(46,125,79,0); }
+  0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(22,163,74,0.35); }
+  50%      { opacity:0.75; box-shadow: 0 0 0 5px rgba(22,163,74,0); }
 }
-
-/* LANG TOGGLE */
-.lang-toggle {
-  display: flex; border: 1px solid var(--border);
-  border-radius: 4px; overflow: hidden;
-}
+.lang-toggle { display: flex; border: 1px solid var(--border); border-radius: 3px; overflow: hidden; }
 .lang-btn {
-  font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase;
-  padding: 6px 14px; border: none; background: transparent;
-  color: var(--muted); cursor: pointer; transition: all 0.2s;
-  font-family: 'Lato', sans-serif; font-weight: 700;
+  font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 5px 12px; border: none; background: transparent;
+  color: var(--muted); cursor: pointer; font-family: 'DM Sans', sans-serif;
+  font-weight: 500; transition: all 0.2s;
 }
 .lang-btn.active { background: var(--navy); color: var(--white); }
 .lang-btn:not(.active):hover { color: var(--navy); }
@@ -98,406 +84,380 @@ nav.scrolled { box-shadow: var(--shadow); }
 /* ── HERO ── */
 .hero {
   min-height: 100vh;
-  display: grid; grid-template-columns: 1fr 1fr;
-  padding-top: 68px;
+  display: grid; grid-template-columns: 55% 45%;
+  padding-top: 64px;
 }
-
 .hero-left {
   background: var(--navy);
-  padding: 80px 60px 80px 60px;
+  padding: 88px 72px;
   display: flex; flex-direction: column; justify-content: center;
   position: relative; overflow: hidden;
 }
+/* Subtle geometric accent */
 .hero-left::after {
   content: '';
-  position: absolute; bottom: -60px; right: -60px;
-  width: 280px; height: 280px;
-  border: 1px solid rgba(184,150,90,0.15);
-  border-radius: 50%;
+  position: absolute; bottom: 0; right: 0;
+  width: 240px; height: 240px;
+  background: linear-gradient(135deg, transparent 50%, rgba(30,95,168,0.12) 50%);
 }
-.hero-left::before {
-  content: '';
-  position: absolute; top: -40px; left: -40px;
-  width: 180px; height: 180px;
-  border: 1px solid rgba(184,150,90,0.1);
-  border-radius: 50%;
-}
-
 .hero-tag {
-  font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 28px;
-  display: flex; align-items: center; gap: 12px;
-  animation: fadeUp 0.7s ease 0.2s both;
+  font-size: 0.68rem; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 14px;
+  animation: fadeUp 0.6s ease 0.15s both;
 }
-.hero-tag::before { content: ''; width: 32px; height: 1px; background: var(--gold); }
-
+.hero-tag::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
 .hero-name {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.8rem, 4.5vw, 4.2rem);
-  font-weight: 700; color: var(--white);
-  line-height: 1.1; margin-bottom: 8px;
-  animation: fadeUp 0.7s ease 0.35s both;
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.6rem, 4vw, 4rem);
+  color: var(--white); line-height: 1.05;
+  margin-bottom: 24px;
+  animation: fadeUp 0.6s ease 0.3s both;
 }
-
-.hero-divider {
-  width: 48px; height: 2px;
-  background: var(--gold); margin: 24px 0;
-  animation: fadeUp 0.7s ease 0.5s both;
-}
-
 .hero-role {
-  font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
-  color: rgba(255,255,255,0.55); margin-bottom: 32px;
-  font-weight: 400; line-height: 1.8;
-  animation: fadeUp 0.7s ease 0.5s both;
+  font-size: 0.78rem; letter-spacing: 2.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.45); margin-bottom: 32px;
+  font-weight: 500; line-height: 2;
+  border-left: 2px solid var(--accent); padding-left: 16px;
+  animation: fadeUp 0.6s ease 0.45s both;
 }
-
 .hero-bio {
-  font-size: 1rem; color: rgba(255,255,255,0.75);
-  line-height: 1.85; margin-bottom: 44px; max-width: 460px;
-  animation: fadeUp 0.7s ease 0.65s both;
+  font-size: 0.97rem; color: rgba(255,255,255,0.7);
+  line-height: 1.9; margin-bottom: 48px; max-width: 440px;
+  animation: fadeUp 0.6s ease 0.6s both;
 }
-.hero-bio strong { color: var(--gold2); font-weight: 400; }
-
+.hero-bio strong { color: rgba(255,255,255,0.95); font-weight: 500; }
 .hero-ctas {
-  display: flex; gap: 14px; flex-wrap: wrap;
-  animation: fadeUp 0.7s ease 0.8s both;
+  display: flex; gap: 12px; flex-wrap: wrap;
+  animation: fadeUp 0.6s ease 0.75s both;
 }
-
 .btn-primary {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 13px 28px; background: var(--gold);
-  color: var(--navy); font-size: 0.78rem; font-weight: 700;
+  padding: 12px 26px; background: var(--accent);
+  color: var(--white); font-size: 0.75rem; font-weight: 600;
   letter-spacing: 1.5px; text-transform: uppercase;
   text-decoration: none; border: none; cursor: pointer;
-  transition: all 0.25s; border-radius: 2px;
-  font-family: 'Lato', sans-serif;
+  transition: all 0.22s; border-radius: 2px;
+  font-family: 'DM Sans', sans-serif;
 }
-.btn-primary:hover { background: var(--gold2); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(184,150,90,0.35); }
-
+.btn-primary:hover { background: #1a4f8f; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(30,95,168,0.3); }
 .btn-outline {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 13px 28px; background: transparent;
-  color: rgba(255,255,255,0.8); font-size: 0.78rem; font-weight: 400;
+  padding: 12px 26px; background: transparent;
+  color: rgba(255,255,255,0.75); font-size: 0.75rem; font-weight: 500;
   letter-spacing: 1.5px; text-transform: uppercase;
-  text-decoration: none; border: 1px solid rgba(255,255,255,0.25);
-  cursor: pointer; transition: all 0.25s; border-radius: 2px;
-  font-family: 'Lato', sans-serif;
+  text-decoration: none; border: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer; transition: all 0.22s; border-radius: 2px;
+  font-family: 'DM Sans', sans-serif;
 }
 .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
 
-/* HERO RIGHT — PHOTO */
+/* HERO RIGHT */
 .hero-right {
-  background: var(--cream);
+  background: var(--light);
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  padding: 60px 40px;
-  position: relative;
-  animation: fadeIn 0.8s ease 0.5s both;
+  padding: 64px 48px;
+  gap: 32px;
+  animation: fadeIn 0.8s ease 0.4s both;
 }
-
-.photo-wrap {
-  width: 320px; height: 420px;
-  position: relative; margin-bottom: 40px;
-}
+.photo-wrap { width: 280px; height: 360px; position: relative; }
 .photo-box {
   width: 100%; height: 100%;
-  background: var(--white);
-  border: 1px solid var(--border);
+  background: var(--white); border: 1px solid var(--border);
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
-  gap: 16px; color: var(--muted);
-  font-size: 0.75rem; letter-spacing: 2px;
-  text-transform: uppercase; overflow: hidden;
-  position: relative;
+  gap: 12px; color: var(--muted);
+  font-size: 0.7rem; letter-spacing: 2px;
+  text-transform: uppercase; overflow: hidden; position: relative;
 }
 .photo-box img {
   width: 100%; height: 100%;
   object-fit: cover; object-position: top center;
   position: absolute; inset: 0;
 }
-.photo-box svg { width: 52px; height: 52px; opacity: 0.25; color: var(--navy); }
-/* Gold accent corner */
+.photo-box svg { width: 44px; height: 44px; opacity: 0.2; color: var(--navy); }
+/* Accent corner lines */
 .photo-wrap::before {
-  content: '';
-  position: absolute; top: -10px; left: -10px;
-  width: 60px; height: 60px;
-  border-top: 2px solid var(--gold);
-  border-left: 2px solid var(--gold);
+  content: ''; position: absolute; top: -8px; left: -8px;
+  width: 48px; height: 48px;
+  border-top: 2px solid var(--accent); border-left: 2px solid var(--accent);
 }
 .photo-wrap::after {
-  content: '';
-  position: absolute; bottom: -10px; right: -10px;
-  width: 60px; height: 60px;
-  border-bottom: 2px solid var(--gold);
-  border-right: 2px solid var(--gold);
+  content: ''; position: absolute; bottom: -8px; right: -8px;
+  width: 48px; height: 48px;
+  border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent);
 }
-
-/* CREDENTIALS STRIP */
-.credentials {
-  display: flex; flex-direction: column; gap: 10px;
-  width: 320px;
-}
+.credentials { display: flex; flex-direction: column; gap: 8px; width: 280px; }
 .credential-item {
   display: flex; align-items: center; gap: 12px;
-  padding: 12px 16px;
+  padding: 11px 14px;
   background: var(--white); border: 1px solid var(--border);
-  border-left: 3px solid var(--gold);
+  border-left: 2px solid var(--accent);
 }
-.credential-item svg { width: 16px; height: 16px; color: var(--gold); flex-shrink: 0; }
-.credential-text { font-size: 0.78rem; color: var(--navy); font-weight: 400; letter-spacing: 0.3px; }
+.credential-item svg { width: 14px; height: 14px; color: var(--accent); flex-shrink: 0; }
+.credential-text { font-size: 0.75rem; color: var(--navy); font-weight: 500; }
 
 /* ── SECTIONS ── */
 section { position: relative; }
-
-.section-inner { max-width: 1100px; margin: 0 auto; padding: 100px 60px; }
-
+.section-inner { max-width: 1080px; margin: 0 auto; padding: 96px 64px; }
 .section-eyebrow {
-  font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 12px; font-weight: 700;
-  display: flex; align-items: center; gap: 12px;
+  font-size: 0.67rem; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 10px; font-weight: 600;
+  display: flex; align-items: center; gap: 10px;
 }
-.section-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
-
+.section-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
 .section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  font-weight: 700; color: var(--navy);
-  line-height: 1.2; margin-bottom: 16px;
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  color: var(--navy); line-height: 1.2; margin-bottom: 14px;
 }
 .section-sub {
-  font-size: 1rem; color: var(--muted);
-  max-width: 560px; line-height: 1.8; margin-bottom: 60px;
+  font-size: 0.95rem; color: var(--muted);
+  max-width: 520px; line-height: 1.85; margin-bottom: 56px;
 }
 
 /* ── EXPERIENCE ── */
 #experience { background: var(--white); }
-
-.timeline { position: relative; padding-left: 28px; }
+.timeline { position: relative; padding-left: 24px; }
 .timeline::before {
   content: ''; position: absolute;
   left: 0; top: 8px; bottom: 0; width: 1px;
-  background: linear-gradient(to bottom, var(--gold), var(--border));
+  background: linear-gradient(to bottom, var(--accent), var(--border));
 }
-
 .tl-item {
-  position: relative; margin-bottom: 56px;
-  opacity: 0; transform: translateY(16px);
-  transition: all 0.55s ease;
+  position: relative; margin-bottom: 52px;
+  opacity: 0; transform: translateY(14px);
+  transition: all 0.5s ease;
 }
 .tl-item.visible { opacity: 1; transform: translateY(0); }
-
 .tl-dot {
-  position: absolute; left: -34px; top: 6px;
-  width: 12px; height: 12px;
-  background: var(--white); border: 2px solid var(--gold);
+  position: absolute; left: -29px; top: 7px;
+  width: 10px; height: 10px;
+  background: var(--white); border: 2px solid var(--accent);
   border-radius: 50%;
 }
-
 .tl-period {
-  font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 6px; font-weight: 700;
+  font-size: 0.67rem; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 5px; font-weight: 600;
 }
 .tl-role {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.35rem; font-weight: 600;
-  color: var(--navy); margin-bottom: 3px;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.25rem; color: var(--navy); margin-bottom: 2px;
 }
 .tl-org {
-  font-size: 0.82rem; color: var(--muted);
-  margin-bottom: 14px; font-weight: 400; letter-spacing: 0.3px;
+  font-size: 0.8rem; color: var(--muted);
+  margin-bottom: 12px; font-weight: 400; letter-spacing: 0.2px;
 }
 .tl-desc {
-  font-size: 0.95rem; color: var(--text);
-  max-width: 680px; line-height: 1.85; margin-bottom: 16px;
+  font-size: 0.93rem; color: var(--text);
+  max-width: 640px; line-height: 1.85; margin-bottom: 14px;
 }
-.tl-desc strong { color: var(--navy); font-weight: 700; }
-
-.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tl-desc strong { color: var(--navy); font-weight: 600; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .tag {
-  font-size: 0.68rem; letter-spacing: 1px; text-transform: uppercase;
-  padding: 4px 12px; border: 1px solid var(--border);
-  color: var(--navy); background: var(--cream);
-  border-radius: 2px; font-weight: 400;
+  font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase;
+  padding: 3px 10px; border: 1px solid var(--border);
+  color: var(--navy); background: var(--light);
+  border-radius: 2px; font-weight: 500;
 }
 
 /* ── EXPERTISE ── */
 #expertise { background: var(--cream); }
-
 .expertise-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
 }
 .exp-card {
-  background: var(--white); padding: 36px 32px;
+  background: var(--white); padding: 32px 28px;
   border: 1px solid var(--border);
-  border-top: 3px solid transparent;
-  transition: all 0.3s;
-  opacity: 0; transform: translateY(16px); transition: all 0.5s ease;
+  border-top: 2px solid transparent;
+  opacity: 0; transform: translateY(14px);
+  transition: all 0.45s ease;
 }
 .exp-card.visible { opacity: 1; transform: translateY(0); }
-.exp-card:hover { border-top-color: var(--gold); box-shadow: var(--shadow); }
-
-.exp-icon { font-size: 1.8rem; margin-bottom: 18px; display: block; }
+.exp-card:hover { border-top-color: var(--accent); box-shadow: 0 4px 20px rgba(15,31,61,0.06); }
+.exp-icon { font-size: 1.6rem; margin-bottom: 16px; display: block; }
 .exp-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.1rem; font-weight: 600;
-  color: var(--navy); margin-bottom: 10px;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.05rem; color: var(--navy); margin-bottom: 8px;
 }
-.exp-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.75; margin-bottom: 18px; }
+.exp-desc { font-size: 0.87rem; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
 .exp-list { display: flex; flex-direction: column; gap: 5px; }
 .exp-item {
   font-size: 0.78rem; color: var(--text);
-  display: flex; align-items: flex-start; gap: 8px; line-height: 1.5;
+  padding: 4px 0 4px 12px;
+  border-left: 2px solid var(--border);
+  line-height: 1.5;
 }
-.exp-item::before { content: '—'; color: var(--gold); flex-shrink: 0; font-size: 0.7rem; margin-top: 2px; }
 
 /* ── FRAMEWORKS ── */
-#frameworks { background: var(--white); }
-
-.fw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-
+#frameworks { background: var(--navy); }
+#frameworks .section-eyebrow { color: var(--gold); }
+#frameworks .section-eyebrow::before { background: var(--gold); }
+#frameworks .section-title { color: var(--white); }
+#frameworks .section-sub { color: rgba(255,255,255,0.5); }
+.fw-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+}
 .fw-item {
-  display: flex; align-items: center; gap: 20px;
-  padding: 20px 24px; border: 1px solid var(--border);
-  background: var(--cream); transition: all 0.25s;
-  opacity: 0; transform: translateX(-12px); transition: all 0.5s ease;
+  background: var(--navy);
+  padding: 28px 24px;
+  display: flex; flex-direction: column; gap: 8px;
+  opacity: 0; transform: translateY(10px);
+  transition: all 0.4s ease;
+  cursor: default;
 }
-.fw-item.visible { opacity: 1; transform: translateX(0); }
-.fw-item:hover { border-color: var(--gold); background: var(--white); box-shadow: var(--shadow); }
-
+.fw-item.visible { opacity: 1; transform: translateY(0); }
+.fw-item:hover { background: var(--navy2); }
 .fw-abbr {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.1rem; font-weight: 600;
-  color: var(--navy); min-width: 90px;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem; color: var(--gold);
+  display: block;
 }
-.fw-details { flex: 1; }
-.fw-name { font-size: 0.85rem; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
-.fw-context { font-size: 0.75rem; color: var(--muted); }
+.fw-name { font-size: 0.78rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
+.fw-context { font-size: 0.72rem; color: rgba(255,255,255,0.35); }
 .fw-level {
-  font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase;
-  color: var(--gold); font-weight: 700; white-space: nowrap;
+  margin-top: 4px;
+  font-size: 0.62rem; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--accent); font-weight: 600;
+  display: inline-block; padding: 2px 8px;
+  border: 1px solid rgba(30,95,168,0.4);
 }
 
 /* ── EDUCATION ── */
-#education { background: var(--navy); }
-#education .section-title { color: var(--white); }
-#education .section-sub { color: rgba(255,255,255,0.55); }
-#education .section-eyebrow { color: var(--gold2); }
-#education .section-eyebrow::before { background: var(--gold2); }
-
-.edu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-
+#education { background: var(--white); }
+.edu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 .edu-card {
-  padding: 32px; border: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.04);
-  transition: all 0.3s;
-  opacity: 0; transform: translateY(16px); transition: all 0.5s ease;
+  padding: 28px 28px; border: 1px solid var(--border);
+  opacity: 0; transform: translateY(12px);
+  transition: all 0.45s ease;
 }
 .edu-card.visible { opacity: 1; transform: translateY(0); }
-.edu-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(184,150,90,0.4); }
-
+.edu-card:hover { box-shadow: 0 4px 20px rgba(15,31,61,0.06); }
 .edu-type {
-  font-size: 0.68rem; letter-spacing: 2.5px; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 10px; font-weight: 700;
+  font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 8px; font-weight: 600;
 }
 .edu-degree {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.15rem; font-weight: 600;
-  color: var(--white); margin-bottom: 6px; line-height: 1.3;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem; color: var(--navy); margin-bottom: 4px;
 }
-.edu-school { font-size: 0.82rem; color: rgba(255,255,255,0.45); }
+.edu-school { font-size: 0.82rem; color: var(--muted); }
 
 /* ── LANGUAGES ── */
 #languages { background: var(--cream); }
-
-.lang-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 700px; }
-
+.lang-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 640px; }
 .lang-card {
-  padding: 28px 32px; background: var(--white);
+  background: var(--white); padding: 28px 28px;
   border: 1px solid var(--border);
-  display: flex; flex-direction: column; gap: 14px;
-  transition: all 0.3s;
-  opacity: 0; transform: translateY(16px); transition: all 0.5s ease;
+  opacity: 0; transform: translateY(12px);
+  transition: all 0.45s ease;
 }
 .lang-card.visible { opacity: 1; transform: translateY(0); }
-.lang-card:hover { box-shadow: var(--shadow); border-color: var(--gold); }
-
-.lang-header { display: flex; align-items: center; gap: 12px; }
+.lang-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
 .lang-flag { font-size: 1.6rem; }
-.lang-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.1rem; font-weight: 600; color: var(--navy);
-}
+.lang-name { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--navy); }
 .lang-level { font-size: 0.75rem; color: var(--muted); }
-.lang-bar-bg { height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
-.lang-bar { height: 100%; background: var(--gold); border-radius: 2px; width: 0; transition: width 1.2s ease; }
-.lang-cert {
-  font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase;
-  color: var(--gold); font-weight: 700;
+.lang-bar-bg {
+  height: 2px; background: var(--border); margin-bottom: 10px; border-radius: 1px;
 }
+.lang-bar {
+  height: 2px; background: var(--accent); width: 0;
+  transition: width 1.2s ease; border-radius: 1px;
+}
+.lang-cert { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.5px; }
+
+/* ── TOOLS ── */
+#tools { background: var(--white); }
+.tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.tool-group {
+  padding: 28px 24px; border: 1px solid var(--border); background: var(--light);
+}
+.tool-group-title {
+  font-size: 0.67rem; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 16px; font-weight: 600;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border);
+}
+.tool-list { display: flex; flex-direction: column; gap: 12px; }
+.tool-item {}
+.tool-name { font-size: 0.87rem; color: var(--navy); font-weight: 600; margin-bottom: 2px; }
+.tool-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
 
 /* ── CONTACT ── */
-#contact { background: var(--white); }
-
+#contact { background: var(--navy); }
 .contact-inner {
-  max-width: 1100px; margin: 0 auto; padding: 100px 60px;
+  max-width: 1080px; margin: 0 auto; padding: 96px 64px;
   display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
 }
-.contact-left .section-sub { margin-bottom: 40px; }
-
-.contact-links { display: flex; flex-direction: column; gap: 14px; }
+#contact .section-eyebrow { color: var(--gold); }
+#contact .section-eyebrow::before { background: var(--gold); }
+#contact .section-title { color: var(--white); }
+#contact .section-sub { color: rgba(255,255,255,0.5); margin-bottom: 36px; }
+.contact-links { display: flex; flex-direction: column; gap: 10px; }
 .contact-link {
-  display: flex; align-items: center; gap: 14px;
-  padding: 16px 20px; border: 1px solid var(--border);
-  text-decoration: none; color: var(--navy);
-  transition: all 0.25s; font-size: 0.88rem;
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.87rem; color: rgba(255,255,255,0.65);
+  text-decoration: none; padding: 12px 16px;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.2s;
 }
-.contact-link:hover { border-color: var(--gold); background: var(--cream); padding-left: 28px; }
-.contact-link svg { width: 18px; height: 18px; color: var(--gold); flex-shrink: 0; }
-
-.contact-right {
-  background: var(--navy); padding: 48px;
-  border-left: 4px solid var(--gold);
+.contact-link svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--gold); }
+.contact-link:hover {
+  color: var(--white); border-color: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.04);
 }
 .contact-quote {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.35rem; font-weight: 400; font-style: italic;
-  color: rgba(255,255,255,0.85); line-height: 1.7; margin-bottom: 24px;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.25rem; color: rgba(255,255,255,0.65);
+  line-height: 1.75; font-style: italic;
+  margin-bottom: 20px;
 }
 .contact-quote-attr {
-  font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--gold);
+  font-size: 0.75rem; color: var(--gold);
+  letter-spacing: 1.5px; text-transform: uppercase;
 }
 
 /* ── FOOTER ── */
 footer {
-  background: var(--navy); padding: 28px 60px;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  background: #08111f;
+  padding: 24px 64px;
   display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.05);
 }
-.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.35); letter-spacing: 0.5px; }
-.footer-built { font-size: 0.75rem; color: rgba(255,255,255,0.35); }
-.footer-built span { color: var(--gold); }
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+.footer-built { font-size: 0.72rem; color: rgba(255,255,255,0.2); }
+.footer-built span { color: var(--accent); }
 
 /* ── ANIMATIONS ── */
-@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
 
-/* ── MOBILE ── */
+/* ── RESPONSIVE ── */
 @media (max-width: 900px) {
-  nav { padding: 0 20px; }
+  nav { padding: 0 24px; }
   .nav-links { display: none; }
   .hero { grid-template-columns: 1fr; }
-  .hero-left { padding: 60px 24px; }
-  .hero-right { padding: 48px 24px; }
-  .photo-wrap { width: 260px; height: 340px; }
-  .section-inner { padding: 70px 24px; }
+  .hero-right { display: none; }
+  .hero-left { padding: 64px 32px; }
+  .section-inner { padding: 72px 32px; }
+  .expertise-grid { grid-template-columns: 1fr 1fr; }
+  .fw-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-inner { grid-template-columns: 1fr; gap: 48px; padding: 72px 32px; }
+  .tools-grid { grid-template-columns: 1fr; }
+  footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+}
+@media (max-width: 600px) {
   .expertise-grid { grid-template-columns: 1fr; }
-  .fw-grid { grid-template-columns: 1fr; }
+  .fw-grid { grid-template-columns: 1fr 1fr; }
   .edu-grid { grid-template-columns: 1fr; }
   .lang-grid { grid-template-columns: 1fr; }
-  .contact-inner { grid-template-columns: 1fr; gap: 40px; padding: 70px 24px; }
-  footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
 }
 </style>
 </head>
@@ -505,70 +465,69 @@ footer {
 
 <!-- NAV -->
 <nav id="navbar">
-  <a href="#" class="nav-logo">Pablo<span>.</span>Martínez</a>
+  <a class="nav-logo" href="#top">Pablo<span>.</span></a>
   <ul class="nav-links">
-    <li><a href="#experience" data-en="Experience"   data-es="Experiencia">Experiencia</a></li>
-    <li><a href="#expertise"  data-en="Expertise"    data-es="Especialización">Especialización</a></li>
-    <li><a href="#frameworks" data-en="Frameworks"   data-es="Marcos">Marcos</a></li>
-    <li><a href="#education"  data-en="Education"    data-es="Formación">Formación</a></li>
-    <li><a href="#tools"      data-en="Tools"        data-es="Herramientas">Herramientas</a></li>
-    <li><a href="#languages"  data-en="Languages"    data-es="Idiomas">Idiomas</a></li>
-    <li><a href="#contact"    data-en="Contact"      data-es="Contacto">Contacto</a></li>
+    <li><a href="#experience" data-en="Experience" data-es="Experiencia">Experiencia</a></li>
+    <li><a href="#expertise" data-en="Expertise" data-es="Competencias">Competencias</a></li>
+    <li><a href="#frameworks" data-en="Frameworks" data-es="Frameworks">Frameworks</a></li>
+    <li><a href="#education" data-en="Education" data-es="Formación">Formación</a></li>
+    <li><a href="#contact" data-en="Contact" data-es="Contacto">Contacto</a></li>
   </ul>
   <div class="nav-right">
     <div class="available-dot">
       <div class="dot"></div>
-      <span data-en="Open to opportunities" data-es="Disponible">Disponible</span>
+      <span data-en="Open to work" data-es="Disponible">Disponible</span>
     </div>
     <div class="lang-toggle">
-      <button class="lang-btn"         id="btn-en" onclick="setLang('en')">EN</button>
       <button class="lang-btn active" id="btn-es" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
     </div>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero" id="home">
+<section class="hero" id="top">
   <div class="hero-left">
-    <div class="hero-tag" data-en="Cybersecurity · Spain" data-es="Ciberseguridad · España">Ciberseguridad · España</div>
-    <h1 class="hero-name">Pablo<br>Martínez<br>Bernal</h1>
-    <div class="hero-divider"></div>
-    <p class="hero-role"
-       data-en="SOC Director · GRC Specialist · Information Security Manager"
-       data-es="Director de SOC · Especialista GRC · Responsable de Seguridad">
-      SOC Director · GRC Specialist<br>Information Security Manager
-    </p>
-    <p class="hero-bio"
-       data-en="Ingeniero de telecomunicaciones y profesional de la ciberseguridad con una carrera forjada en la <strong>aviación militar</strong> — helicópteros y RPAS. Desde <strong>liderar equipos de más de 70 personas</strong> y dirigir <strong>programas de ingeniería aeronáutica</strong>, hasta implementar <strong>sistemas integrados de gestión de calidad y seguridad</strong> y dirigir actualmente un <strong>SOC</strong> especializándome en <strong>GRC</strong>. Sólido dominio de <strong>ISO 27001, ENS, NIST y MITRE ATT&amp;CK</strong>."
-       data-es="Ingeniero de telecomunicaciones y profesional de la ciberseguridad con una carrera forjada en la <strong>aviación militar</strong> — helicópteros y RPAS. Desde <strong>liderar equipos de más de 70 personas</strong> y dirigir <strong>programas de ingeniería aeronáutica</strong>, hasta implementar <strong>sistemas integrados de gestión de calidad y seguridad</strong> y dirigir actualmente un <strong>SOC</strong> especializándome en <strong>GRC</strong>. Sólido dominio de <strong>ISO 27001, ENS, NIST y MITRE ATT&amp;CK</strong>.">
-      Ingeniero de telecomunicaciones y profesional de la ciberseguridad con una carrera forjada en la <strong>aviación militar</strong> — helicópteros y RPAS. Desde <strong>liderar equipos de más de 70 personas</strong> y dirigir <strong>programas de ingeniería aeronáutica</strong>, hasta implementar <strong>sistemas integrados de gestión de calidad y seguridad</strong> y dirigir actualmente un <strong>SOC</strong> especializándome en <strong>GRC</strong>. Sólido dominio de <strong>ISO 27001, ENS, NIST y MITRE ATT&amp;CK</strong>.
+    <div class="hero-tag" data-en="Cybersecurity Consultant" data-es="Consultor de Ciberseguridad">Consultor de Ciberseguridad</div>
+    <h1 class="hero-name">Pablo Martínez<br>Bernal</h1>
+    <div class="hero-role" data-en="GRC · ENS · ISO 27001 · SOC Leadership" data-es="GRC · ENS · ISO 27001 · Dirección de SOC">GRC · ENS · ISO 27001 · Dirección de SOC</div>
+    <p class="hero-bio" data-en="Military officer turned cybersecurity specialist. <strong>6+ years</strong> leading teams of up to 70 people in defence and critical infrastructure environments. Expert in <strong>ENS, ISO/IEC 27001, NIST and MAGERIT</strong>, currently heading a 50+ person SOC at Spain's Joint Cyberspace Command."
+       data-es="Oficial de las FAS especializado en ciberseguridad. <strong>+6 años</strong> liderando equipos de hasta 70 personas en entornos de defensa e infraestructuras críticas. Experto en <strong>ENS, ISO/IEC 27001, NIST y MAGERIT</strong>, actualmente al frente de un SOC de +50 personas en el Mando Conjunto del Ciberespacio.">
+      Oficial de las FAS especializado en ciberseguridad. <strong>+6 años</strong> liderando equipos de hasta 70 personas en entornos de defensa e infraestructuras críticas. Experto en <strong>ENS, ISO/IEC 27001, NIST y MAGERIT</strong>, actualmente al frente de un SOC de +50 personas en el Mando Conjunto del Ciberespacio.
     </p>
     <div class="hero-ctas">
-      <a href="#contact" class="btn-primary" data-en="Get in touch" data-es="Contactar">Contacta conmigo</a>
-      <a href="https://github.com/YOUR_USERNAME" target="_blank" class="btn-outline">GitHub</a>
-      <a href="cv/cv_pablo_martinez.pdf" download class="btn-outline" data-en="⬇ Download CV" data-es="⬇ Descargar CV">⬇ Descargar CV</a>
+      <a href="#contact" class="btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span data-en="Get in Touch" data-es="Contactar">Contactar</span>
+      </a>
+      <a href="cv/cv_pablo_martinez.pdf" download class="btn-outline">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span data-en="Download CV" data-es="Descargar CV">Descargar CV</span>
+      </a>
     </div>
   </div>
-
   <div class="hero-right">
     <div class="photo-wrap">
       <div class="photo-box">
-        <img src="img.jpeg" alt="Pablo Martínez Bernal">
+        <img src="img.jpeg" alt="Pablo Martínez Bernal"/>
       </div>
     </div>
-
     <div class="credentials">
       <div class="credential-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span class="credential-text">MSc Ciberseguridad y Privacidad · UOC</span>
+      </div>
+      <div class="credential-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <span class="credential-text">Ing. Telecomunicación · UCAM · COITT 16542</span>
+      </div>
+      <div class="credential-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span class="credential-text" data-en="Mando Conjunto del Ciberespacio · SOC Director" data-es="Mando Conjunto del Ciberespacio · Jefe de SOC">Mando Conjunto del Ciberespacio · Jefe de SOC</span>
+        <span class="credential-text">Jefe de SOC · Mando Ciberespacio · FAS</span>
       </div>
       <div class="credential-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        <span class="credential-text" data-en="Telecommunications Engineering + Master in Cybersecurity" data-es="Ing. Telecomunicaciones + Máster en Ciberseguridad">Ing. Telecomunicaciones + Máster en Ciberseguridad</span>
-      </div>
-      <div class="credential-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        <span class="credential-text">ISO 27001 · ENS · NIST · MITRE ATT&CK · MAGERIT</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span class="credential-text">ENS · ISO 27001 · NIST · MAGERIT</span>
       </div>
     </div>
   </div>
@@ -577,63 +536,51 @@ footer {
 <!-- EXPERIENCE -->
 <section id="experience">
   <div class="section-inner">
-    <div class="section-eyebrow" data-en="Career" data-es="Carrera">Carrera</div>
+    <div class="section-eyebrow" data-en="Career" data-es="Trayectoria">Trayectoria</div>
     <h2 class="section-title" data-en="Professional Experience" data-es="Experiencia Profesional">Experiencia Profesional</h2>
-    <p class="section-sub"
-       data-en="Seis años construyendo y liderando programas de seguridad en los entornos operativos más exigentes."
-       data-es="Seis años construyendo y liderando programas de seguridad en los entornos operativos más exigentes.">
-      Seis años construyendo y liderando programas de seguridad en los entornos operativos más exigentes.
-    </p>
-
+    <p class="section-sub" data-en="Six years of progressively senior roles in defence, engineering and cybersecurity." data-es="Seis años en roles de responsabilidad creciente en defensa, ingeniería y ciberseguridad.">Seis años en roles de responsabilidad creciente en defensa, ingeniería y ciberseguridad.</p>
     <div class="timeline">
 
       <div class="tl-item">
         <div class="tl-dot"></div>
-        <div class="tl-period" data-en="2024 — Present · Joint Cyberspace Command" data-es="2024 — Actualidad · Mando Conjunto del Ciberespacio">2024 — Actualidad · Mando Conjunto del Ciberespacio</div>
-        <div class="tl-role" data-en="SOC Director" data-es="Jefe de SOC">Jefe de SOC</div>
-        <div class="tl-org">Mando Conjunto del Ciberespacio · Fuerzas Armadas Españolas</div>
-        <p class="tl-desc"
-           data-en="Leading a 30+ person Security Operations Center within Spain's most critical cyber defence infrastructure. Driving threat detection, incident response and continuous monitoring across national assets. Spearheading alignment with <strong>SOC 2</strong> operational standards and integrating <strong>MITRE ATT&amp;CK</strong> into detection engineering and threat intelligence workflows."
-           data-es="Al mando de un Centro de Operaciones de Seguridad de más de 30 personas integrado en la infraestructura de ciberdefensa más crítica de España. Responsable de la detección de amenazas, respuesta a incidentes y monitorización continua. Impulsando la alineación con los estándares operativos <strong>SOC 2</strong> e integración del marco <strong>MITRE ATT&amp;CK</strong> en la ingeniería de detección e inteligencia de amenazas.">
-          Leading a 30+ person Security Operations Center within Spain's most critical cyber defence infrastructure. Driving threat detection, incident response and continuous monitoring across national assets. Spearheading alignment with <strong>SOC 2</strong> operational standards and integrating <strong>MITRE ATT&amp;CK</strong> into detection engineering and threat intelligence workflows.
+        <div class="tl-period" data-en="Oct 2025 — Present" data-es="Oct 2025 — Actualidad">Oct 2025 — Actualidad</div>
+        <div class="tl-role" data-en="Head of Security Operations Centre (SOC)" data-es="Jefe de Centro de Operaciones de Seguridad (SOC)">Jefe de Centro de Operaciones de Seguridad (SOC)</div>
+        <div class="tl-org">Mando Conjunto del Ciberespacio (MCCE) · Fuerzas Armadas Españolas</div>
+        <p class="tl-desc" data-en="Lead a 50+ person SOC with 24/7 operations monitoring Spain's critical Defence networks. Define technical guidelines for command, build ISO 27001 and ENS-aligned processes, and manage incident response including threat hunting and crisis communication plans."
+           data-es="Dirijo un SOC de más de 50 personas con servicio 24/7 monitorizando las principales redes de Defensa. Proporciono orientación técnica al mando, diseño procesos alineados con <strong>ISO 27001 y ENS</strong>, y gestiono la respuesta a incidentes incluyendo threat hunting y planes de comunicación de crisis.">
+          Dirijo un SOC de más de 50 personas con servicio 24/7 monitorizando las principales redes de Defensa. Proporciono orientación técnica al mando, diseño procesos alineados con <strong>ISO 27001 y ENS</strong>, y gestiono la respuesta a incidentes incluyendo threat hunting y planes de comunicación de crisis.
         </p>
         <div class="tags">
-          <span class="tag">SOC Leadership</span><span class="tag">MITRE ATT&CK</span>
-          <span class="tag">SOC 2</span><span class="tag">Incident Response</span>
-          <span class="tag">Threat Intelligence</span><span class="tag">SIEM</span>
+          <span class="tag">ISO 27001</span><span class="tag">ENS</span><span class="tag">Threat Hunting</span>
+          <span class="tag">Splunk</span><span class="tag">AlienVault OSSIM</span><span class="tag">PILAR / INES / LUCÍA</span>
         </div>
       </div>
 
       <div class="tl-item">
         <div class="tl-dot"></div>
-        <div class="tl-period" data-en="2021 — 2024 · Spanish Army" data-es="2021 — 2024 · Ejército de Tierra">2021 — 2024 · Ejército de Tierra</div>
-        <div class="tl-role" data-en="Technical Director of Engineering" data-es="Director Técnico de Ingeniería">Director Técnico de Ingeniería</div>
-        <div class="tl-org">Dirección de Ingeniería del Ejército de Tierra</div>
-        <p class="tl-desc"
-           data-en="Technical director overseeing complex engineering programmes with direct engagement with industry vendors. Drafted technical requirements specifications, designed test plans and evaluation frameworks, and managed supplier relationships across defence technology projects. Developed governance structures ensuring compliance with national security standards."
-           data-es="Director técnico responsable de programas de ingeniería complejos con interlocución directa con empresas del sector defensa. Redacción de pliegos de prescripciones técnicas, diseño de planes de pruebas y marcos de evaluación. Desarrollo de estructuras de gobernanza para garantizar el cumplimiento con los estándares nacionales de seguridad.">
-          Technical director overseeing complex engineering programmes with direct engagement with industry vendors. Drafted technical requirements specifications, designed test plans and evaluation frameworks, and managed supplier relationships across defence technology projects. Developed governance structures ensuring compliance with national security standards.
+        <div class="tl-period" data-en="Oct 2023 — Oct 2025" data-es="Oct 2023 — Oct 2025">Oct 2023 — Oct 2025</div>
+        <div class="tl-role" data-en="Head of Aerial Platforms — Engineering Directorate" data-es="Jefe del Negociado de Plataformas Aéreas — Dirección de Ingeniería">Jefe del Negociado de Plataformas Aéreas — Dirección de Ingeniería</div>
+        <div class="tl-org">DIMALE · Mando de Apoyo Logístico del Ejército de Tierra</div>
+        <p class="tl-desc" data-en="Technical direction of defence public contracts for helicopters and unmanned aerial systems (UAS). Led a team of ISDEFE engineers, authored technical specifications (PPT) and ensured compliance with PECAL/NATO standards. Managed international supplier relationships and validation programmes."
+           data-es="Dirección técnica de contratos públicos de defensa para helicópteros y sistemas aéreos no tripulados (UAS). Coordiné un equipo de ingenieros de ISDEFE, redacté pliegos de prescripciones técnicas (PPT) y garanticé el cumplimiento de normas PECAL y estándares OTAN. Gestión de proveedores internacionales y programas de validación.">
+          Dirección técnica de contratos públicos de defensa para helicópteros y sistemas aéreos no tripulados (UAS). Coordiné un equipo de ingenieros de ISDEFE, redacté pliegos de prescripciones técnicas (PPT) y garanticé el cumplimiento de normas PECAL y estándares OTAN. Gestión de proveedores internacionales y programas de validación.
         </p>
         <div class="tags">
-          <span class="tag">Technical Governance</span><span class="tag">Vendor Management</span>
-          <span class="tag">Risk Assessment</span><span class="tag">ENS</span><span class="tag">Procurement</span>
+          <span class="tag">PECAL</span><span class="tag">Contratación Pública</span><span class="tag">Gestión de Equipos</span><span class="tag">OTAN</span>
         </div>
       </div>
 
       <div class="tl-item">
         <div class="tl-dot"></div>
-        <div class="tl-period" data-en="2018 — 2021 · BHELMA III · Spanish Army Aviation" data-es="2018 — 2021 · BHELMA III · Aviación del Ejército de Tierra">2018 — 2021 · BHELMA III · Aviación del Ejército de Tierra</div>
-        <div class="tl-role" data-en="Quality &amp; Security Manager" data-es="Jefe de Calidad y Seguridad">Jefe de Calidad y Seguridad</div>
-        <div class="tl-org">Batallón de Helicópteros BHELMA III · División de Aviación</div>
-        <p class="tl-desc"
-           data-en="Head of Quality leading the design and implementation of an <strong>Integrated Quality Management System (IQMS)</strong> incorporating GDPR data protection requirements. Ensured compliance with <strong>PERAM</strong> regulations and military aeronautical quality standards. This foundational experience in governance and process management laid the groundwork for subsequent deep expertise in <strong>ISO 27001, ENS, NIST and MAGERIT</strong>."
-           data-es="Jefe de Calidad liderando el diseño e implantación de un <strong>Sistema Integrado de Gestión de la Calidad (SIGC)</strong> con integración de requisitos de protección de datos del <strong>RGPD</strong>. Cumplimiento de la normativa <strong>PERAM</strong> y estándares de calidad aeronáutica militar. Esta experiencia fundacional en gobernanza y gestión de procesos sentó las bases del posterior conocimiento en <strong>ISO 27001, ENS, NIST y MAGERIT</strong>.">
-          Head of Quality leading the design and implementation of an <strong>Integrated Quality Management System (IQMS)</strong> incorporating GDPR data protection requirements. Ensured compliance with <strong>PERAM</strong> regulations and military aeronautical quality standards. This foundational experience in governance and process management laid the groundwork for subsequent deep expertise in <strong>ISO 27001, ENS, NIST and MAGERIT</strong>.
+        <div class="tl-period" data-en="Aug 2020 — Oct 2023" data-es="Ago 2020 — Oct 2023">Ago 2020 — Oct 2023</div>
+        <div class="tl-role" data-en="Head of Quality" data-es="Jefe de Calidad">Jefe de Calidad</div>
+        <div class="tl-org">Batallón de Helicópteros de Maniobra III (BHELMA III)</div>
+        <p class="tl-desc" data-en="Led a team of 70+ in maintenance, logistic support and quality control of the HT-29 helicopter, including international deployments (Mali). Implemented a quality management system under PERAM, integrating GDPR and ISO/IEC 27001 principles. Conducted internal audits and managed external certification bodies."
+           data-es="Dirigí un equipo de más de 70 personas en mantenimiento y control de calidad del helicóptero HT-29, incluyendo despliegues internacionales (Mali). Implanté un sistema de gestión de calidad conforme a PERAM, integrando principios de <strong>RGPD e ISO/IEC 27001</strong>. Auditorías internas y relación con organismos certificadores externos.">
+          Dirigí un equipo de más de 70 personas en mantenimiento y control de calidad del helicóptero HT-29, incluyendo despliegues internacionales (Mali). Implanté un sistema de gestión de calidad conforme a PERAM, integrando principios de <strong>RGPD e ISO/IEC 27001</strong>. Auditorías internas y relación con organismos certificadores externos.
         </p>
         <div class="tags">
-          <span class="tag">SIGC / IQMS</span><span class="tag">GDPR / RGPD</span>
-          <span class="tag">PERAM</span><span class="tag">Aeronautical Quality</span>
-          <span class="tag">Internal Audit</span><span class="tag">Team Leadership</span>
+          <span class="tag">ISO 9001</span><span class="tag">PERAM</span><span class="tag">Auditoría Interna</span><span class="tag">RGPD</span>
         </div>
       </div>
 
@@ -644,71 +591,67 @@ footer {
 <!-- EXPERTISE -->
 <section id="expertise">
   <div class="section-inner">
-    <div class="section-eyebrow" data-en="What I do" data-es="Qué hago">Qué hago</div>
-    <h2 class="section-title" data-en="Core Expertise" data-es="Áreas de Especialización">Áreas de Especialización</h2>
-    <p class="section-sub"
-       data-en="Un amplio conjunto de habilidades en seguridad desarrolladas en roles de liderazgo técnico y militar."
-       data-es="Un amplio conjunto de habilidades en seguridad desarrolladas en roles de liderazgo técnico y militar.">
-      Un amplio conjunto de habilidades en seguridad desarrolladas en roles de liderazgo técnico y militar.
-    </p>
+    <div class="section-eyebrow" data-en="Capabilities" data-es="Capacidades">Capacidades</div>
+    <h2 class="section-title" data-en="Areas of Expertise" data-es="Áreas de Especialización">Áreas de Especialización</h2>
+    <p class="section-sub" data-en="Specialised competencies built across military and technical roles." data-es="Competencias especializadas desarrolladas en roles militares y técnicos.">Competencias especializadas desarrolladas en roles militares y técnicos.</p>
     <div class="expertise-grid">
 
       <div class="exp-card">
         <span class="exp-icon">🛡️</span>
-        <div class="exp-name" data-en="GRC &amp; Compliance" data-es="GRC y Cumplimiento">GRC y Cumplimiento</div>
-        <p class="exp-desc" data-en="Programas GRC de extremo a extremo: diseño de políticas, análisis de riesgos y preparación para auditorías." data-es="Programas GRC de extremo a extremo: diseño de políticas, análisis de riesgos y preparación para auditorías.">Programas GRC de extremo a extremo: diseño de políticas, análisis de riesgos y preparación para auditorías.</p>
+        <div class="exp-name" data-en="GRC & Compliance" data-es="GRC y Cumplimiento">GRC y Cumplimiento</div>
+        <p class="exp-desc" data-en="Design and implementation of governance, risk and compliance frameworks aligned with national and international standards." data-es="Diseño e implantación de marcos de gobernanza, riesgo y cumplimiento alineados con estándares nacionales e internacionales.">Diseño e implantación de marcos de gobernanza, riesgo y cumplimiento alineados con estándares nacionales e internacionales.</p>
         <div class="exp-list">
-          <span class="exp-item" data-en="ISMS design &amp; implementation" data-es="Diseño e implantación de SGSI">Diseño e implantación de SGSI</span>
-          <span class="exp-item" data-en="Gap analyses &amp; audit support" data-es="Análisis de brechas y soporte a auditorías">Análisis de brechas y soporte a auditorías</span>
-          <span class="exp-item" data-en="Policy &amp; procedure development" data-es="Desarrollo de políticas y procedimientos">Desarrollo de políticas y procedimientos</span>
-          <span class="exp-item" data-en="Risk management — Magerit / ISO 31000" data-es="Gestión de riesgos — Magerit / ISO 31000">Gestión de riesgos — Magerit / ISO 31000</span>
+          <span class="exp-item" data-en="ENS Cat. Media / Alta implementation" data-es="Implantación ENS Cat. Media / Alta">Implantación ENS Cat. Media / Alta</span>
+          <span class="exp-item" data-en="ISO/IEC 27001 ISMS lifecycle" data-es="Ciclo de vida SGSI ISO/IEC 27001">Ciclo de vida SGSI ISO/IEC 27001</span>
+          <span class="exp-item" data-en="Policies, norms & procedures" data-es="Políticas, normas y procedimientos">Políticas, normas y procedimientos</span>
+          <span class="exp-item" data-en="Internal & certification audits" data-es="Auditorías internas y de certificación">Auditorías internas y de certificación</span>
         </div>
       </div>
 
       <div class="exp-card">
-        <span class="exp-icon">⚡</span>
+        <span class="exp-icon">🔍</span>
+        <div class="exp-name" data-en="Risk Management" data-es="Gestión de Riesgos">Gestión de Riesgos</div>
+        <p class="exp-desc" data-en="Risk analysis and management using recognised methodologies in complex and regulated environments." data-es="Análisis y gestión de riesgos mediante metodologías reconocidas en entornos complejos y regulados.">Análisis y gestión de riesgos mediante metodologías reconocidas en entornos complejos y regulados.</p>
+        <div class="exp-list">
+          <span class="exp-item">MAGERIT v3</span>
+          <span class="exp-item" data-en="PILAR risk tool (CCN)" data-es="Herramienta PILAR (CCN)">Herramienta PILAR (CCN)</span>
+          <span class="exp-item" data-en="ISO 31000 risk governance" data-es="Gobernanza de riesgos ISO 31000">Gobernanza de riesgos ISO 31000</span>
+          <span class="exp-item" data-en="Security metrics & dashboards" data-es="Métricas e informes de seguridad">Métricas e informes de seguridad</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <span class="exp-icon">📡</span>
         <div class="exp-name" data-en="SOC Operations" data-es="Operaciones SOC">Operaciones SOC</div>
-        <p class="exp-desc" data-en="Construcción y mando de equipos SOC de alto rendimiento en entornos de misión crítica." data-es="Construcción y mando de equipos SOC de alto rendimiento en entornos de misión crítica.">Construcción y mando de equipos SOC de alto rendimiento en entornos de misión crítica.</p>
+        <p class="exp-desc" data-en="Direction and optimisation of security operations centres, from process design to 24/7 incident response." data-es="Dirección y optimización de centros de operaciones de seguridad, desde el diseño de procesos hasta la respuesta a incidentes 24/7.">Dirección y optimización de centros de operaciones de seguridad, desde el diseño de procesos hasta la respuesta a incidentes 24/7.</p>
         <div class="exp-list">
-          <span class="exp-item" data-en="SOC team leadership (30+ analysts)" data-es="Liderazgo SOC (+30 analistas)">SOC team leadership (30+ analysts)</span>
-          <span class="exp-item" data-en="Detection engineering &amp; SIEM tuning" data-es="Ingeniería de detección y SIEM">Ingeniería de detección y SIEM</span>
-          <span class="exp-item" data-en="Incident response &amp; threat hunting" data-es="Respuesta a incidentes y caza de amenazas">Respuesta a incidentes y caza de amenazas</span>
-          <span class="exp-item" data-en="MITRE ATT&amp;CK integration" data-es="Integración de MITRE ATT&amp;CK">Integración de MITRE ATT&amp;CK</span>
-        </div>
-      </div>
-
-      <div class="exp-card">
-        <span class="exp-icon">🔎</span>
-        <div class="exp-name" data-en="Risk &amp; Threat Analysis" data-es="Análisis de Riesgos">Análisis de Riesgos y Amenazas</div>
-        <p class="exp-desc" data-en="Transformar paisajes de amenazas complejos en posturas de riesgo accionables." data-es="Transformar paisajes de amenazas complejos en posturas de riesgo accionables.">Transformar paisajes de amenazas complejos en posturas de riesgo accionables.</p>
-        <div class="exp-list">
-          <span class="exp-item" data-en="Risk assessment &amp; modelling" data-es="Evaluación y modelado de riesgos">Evaluación y modelado de riesgos</span>
-          <span class="exp-item" data-en="Threat intelligence analysis" data-es="Análisis de inteligencia de amenazas">Análisis de inteligencia de amenazas</span>
-          <span class="exp-item" data-en="Vulnerability management" data-es="Gestión de vulnerabilidades">Gestión de vulnerabilidades</span>
-          <span class="exp-item" data-en="Security metrics &amp; reporting" data-es="Métricas e informes de seguridad">Métricas e informes de seguridad</span>
+          <span class="exp-item" data-en="SIEM management (Splunk / AlienVault)" data-es="Gestión SIEM (Splunk / AlienVault)">Gestión SIEM (Splunk / AlienVault)</span>
+          <span class="exp-item" data-en="Threat hunting & incident response" data-es="Threat hunting y respuesta a incidentes">Threat hunting y respuesta a incidentes</span>
+          <span class="exp-item" data-en="Crisis communication plans" data-es="Planes de comunicación de crisis">Planes de comunicación de crisis</span>
+          <span class="exp-item" data-en="MITRE ATT&CK alignment" data-es="Alineación con MITRE ATT&CK">Alineación con MITRE ATT&amp;CK</span>
         </div>
       </div>
 
       <div class="exp-card">
         <span class="exp-icon">📋</span>
         <div class="exp-name" data-en="Data Protection" data-es="Protección de Datos">Protección de Datos</div>
-        <p class="exp-desc" data-en="Gestión de programas de privacidad de datos en entornos regulatorios complejos." data-es="Gestión de programas de privacidad de datos en entornos regulatorios complejos.">Gestión de programas de privacidad de datos en entornos regulatorios complejos.</p>
+        <p class="exp-desc" data-en="Management of data privacy programmes in complex regulatory environments." data-es="Gestión de programas de privacidad de datos en entornos regulatorios complejos.">Gestión de programas de privacidad de datos en entornos regulatorios complejos.</p>
         <div class="exp-list">
-          <span class="exp-item" data-en="GDPR / RGPD compliance" data-es="Cumplimiento RGPD">Cumplimiento RGPD</span>
-          <span class="exp-item" data-en="Data protection impact assessments" data-es="Evaluaciones de impacto (EIPD)">Evaluaciones de impacto (EIPD)</span>
+          <span class="exp-item" data-en="RGPD / LOPDGDD compliance" data-es="Cumplimiento RGPD / LOPDGDD">Cumplimiento RGPD / LOPDGDD</span>
+          <span class="exp-item" data-en="Data protection impact assessments (EIPD)" data-es="Evaluaciones de impacto (EIPD)">Evaluaciones de impacto (EIPD)</span>
           <span class="exp-item" data-en="Privacy-by-design frameworks" data-es="Marcos de privacidad por diseño">Marcos de privacidad por diseño</span>
-          <span class="exp-item" data-en="DPA / processing agreements" data-es="Acuerdos de tratamiento de datos">Acuerdos de tratamiento de datos</span>
+          <span class="exp-item" data-en="Data processing agreements" data-es="Acuerdos de tratamiento de datos">Acuerdos de tratamiento de datos</span>
         </div>
       </div>
 
       <div class="exp-card">
         <span class="exp-icon">🎯</span>
         <div class="exp-name" data-en="Security Leadership" data-es="Liderazgo en Seguridad">Liderazgo en Seguridad</div>
-        <p class="exp-desc" data-en="Comunicación a nivel directivo y gestión de partes interesadas en entornos militares y civiles." data-es="Comunicación a nivel directivo y gestión de partes interesadas en entornos militares y civiles.">Comunicación a nivel directivo y gestión de partes interesadas en entornos militares y civiles.</p>
+        <p class="exp-desc" data-en="Executive communication and stakeholder management in military and civil environments." data-es="Comunicación a nivel directivo y gestión de partes interesadas en entornos militares y civiles.">Comunicación a nivel directivo y gestión de partes interesadas en entornos militares y civiles.</p>
         <div class="exp-list">
-          <span class="exp-item" data-en="Team building &amp; mentoring" data-es="Construcción de equipos y mentoring">Construcción de equipos y mentoring</span>
-          <span class="exp-item" data-en="C-suite &amp; command reporting" data-es="Reporting a dirección y mando">Reporting a dirección y mando</span>
-          <span class="exp-item" data-en="Vendor &amp; contract management" data-es="Gestión de proveedores y contratos">Gestión de proveedores y contratos</span>
+          <span class="exp-item" data-en="Team leadership (50–70 people)" data-es="Liderazgo de equipos (50–70 personas)">Liderazgo de equipos (50–70 personas)</span>
+          <span class="exp-item" data-en="C-suite & command reporting" data-es="Reporting a dirección y mando">Reporting a dirección y mando</span>
+          <span class="exp-item" data-en="Vendor & contract management" data-es="Gestión de proveedores y contratos">Gestión de proveedores y contratos</span>
           <span class="exp-item" data-en="Security awareness training" data-es="Formación en concienciación">Formación en concienciación</span>
         </div>
       </div>
@@ -716,11 +659,11 @@ footer {
       <div class="exp-card">
         <span class="exp-icon">🏗️</span>
         <div class="exp-name" data-en="Technical Architecture" data-es="Arquitectura Técnica">Arquitectura Técnica</div>
-        <p class="exp-desc" data-en="Especificaciones técnicas de nivel defensa y arquitecturas de seguridad para sistemas críticos." data-es="Especificaciones técnicas de nivel defensa y arquitecturas de seguridad para sistemas críticos.">Especificaciones técnicas de nivel defensa y arquitecturas de seguridad para sistemas críticos.</p>
+        <p class="exp-desc" data-en="Defence-grade technical specifications and security architectures for critical systems." data-es="Especificaciones técnicas de nivel defensa y arquitecturas de seguridad para sistemas críticos.">Especificaciones técnicas de nivel defensa y arquitecturas de seguridad para sistemas críticos.</p>
         <div class="exp-list">
-          <span class="exp-item" data-en="Technical requirements (PPT)" data-es="Pliegos de prescripciones técnicas">Pliegos de prescripciones técnicas</span>
-          <span class="exp-item" data-en="Test plan design" data-es="Diseño de planes de pruebas">Diseño de planes de pruebas</span>
+          <span class="exp-item" data-en="Technical requirements (PPT)" data-es="Pliegos de prescripciones técnicas (PPT)">Pliegos de prescripciones técnicas (PPT)</span>
           <span class="exp-item" data-en="Security controls design" data-es="Diseño de controles de seguridad">Diseño de controles de seguridad</span>
+          <span class="exp-item" data-en="Test plan design & validation" data-es="Diseño de planes de pruebas y validación">Diseño de planes de pruebas y validación</span>
           <span class="exp-item" data-en="Infrastructure security review" data-es="Revisión de seguridad de infraestructuras">Revisión de seguridad de infraestructuras</span>
         </div>
       </div>
@@ -733,68 +676,55 @@ footer {
 <section id="frameworks">
   <div class="section-inner">
     <div class="section-eyebrow" data-en="Standards" data-es="Estándares">Estándares</div>
-    <h2 class="section-title" data-en="Frameworks &amp; Standards" data-es="Marcos y Estándares">Marcos y Estándares</h2>
-    <p class="section-sub"
-       data-en="Conocimiento profundo y aplicado de los principales marcos de seguridad nacionales e internacionales."
-       data-es="Conocimiento profundo y aplicado de los principales marcos de seguridad nacionales e internacionales.">
-      Conocimiento profundo y aplicado de los principales marcos de seguridad nacionales e internacionales.
-    </p>
+    <h2 class="section-title" data-en="Frameworks & Standards" data-es="Marcos y Estándares">Marcos y Estándares</h2>
+    <p class="section-sub" data-en="Deep applied knowledge of the main national and international security frameworks." data-es="Conocimiento profundo y aplicado de los principales marcos de seguridad nacionales e internacionales.">Conocimiento profundo y aplicado de los principales marcos de seguridad nacionales e internacionales.</p>
     <div class="fw-grid">
       <div class="fw-item">
         <span class="fw-abbr">ISO 27001</span>
-        <div class="fw-details">
-          <div class="fw-name">Information Security Management System</div>
-          <div class="fw-context" data-en="ISMS design, implementation &amp; audit support" data-es="Diseño, implantación y soporte a auditorías">Diseño, implantación y soporte a auditorías</div>
-        </div>
+        <div class="fw-name">Information Security Management System</div>
+        <div class="fw-context" data-en="ISMS design, implementation & audit" data-es="Diseño, implantación y auditoría SGSI">Diseño, implantación y auditoría SGSI</div>
         <span class="fw-level" data-en="Advanced" data-es="Avanzado">Avanzado</span>
       </div>
       <div class="fw-item">
         <span class="fw-abbr">ENS</span>
-        <div class="fw-details">
-          <div class="fw-name">Esquema Nacional de Seguridad</div>
-          <div class="fw-context" data-en="National Security Framework — Spain" data-es="Marco Nacional de Seguridad — España">Marco Nacional de Seguridad — España</div>
-        </div>
-        <span class="fw-level" data-en="Advanced" data-es="Avanzado">Avanzado</span>
-      </div>
-      <div class="fw-item">
-        <span class="fw-abbr">MITRE</span>
-        <div class="fw-details">
-          <div class="fw-name">ATT&amp;CK Framework</div>
-          <div class="fw-context" data-en="Threat modelling &amp; detection engineering" data-es="Modelado de amenazas e ingeniería de detección">Modelado de amenazas e ingeniería de detección</div>
-        </div>
+        <div class="fw-name">Esquema Nacional de Seguridad</div>
+        <div class="fw-context" data-en="Cat. Media / Alta — full lifecycle" data-es="Cat. Media / Alta — ciclo completo">Cat. Media / Alta — ciclo completo</div>
         <span class="fw-level" data-en="Advanced" data-es="Avanzado">Avanzado</span>
       </div>
       <div class="fw-item">
         <span class="fw-abbr">NIST</span>
-        <div class="fw-details">
-          <div class="fw-name">Cybersecurity Framework</div>
-          <div class="fw-context" data-en="Risk management &amp; security posture" data-es="Gestión de riesgos y postura de seguridad">Gestión de riesgos y postura de seguridad</div>
-        </div>
+        <div class="fw-name">Cybersecurity Framework</div>
+        <div class="fw-context" data-en="Risk management & security posture" data-es="Gestión de riesgos y postura de seguridad">Gestión de riesgos y postura de seguridad</div>
         <span class="fw-level" data-en="Proficient" data-es="Sólido">Sólido</span>
       </div>
       <div class="fw-item">
-        <span class="fw-abbr">SOC 2</span>
-        <div class="fw-details">
-          <div class="fw-name">Service Organization Control 2</div>
-          <div class="fw-context" data-en="Operational alignment &amp; controls design" data-es="Alineación operativa y diseño de controles">Alineación operativa y diseño de controles</div>
-        </div>
-        <span class="fw-level" data-en="Proficient" data-es="Sólido">Sólido</span>
+        <span class="fw-abbr">MAGERIT</span>
+        <div class="fw-name">Metodología de Análisis de Riesgos</div>
+        <div class="fw-context" data-en="Risk analysis for Spanish public sector" data-es="Análisis de riesgos para AAPP españolas">Análisis de riesgos para AAPP españolas</div>
+        <span class="fw-level" data-en="Advanced" data-es="Avanzado">Avanzado</span>
+      </div>
+      <div class="fw-item">
+        <span class="fw-abbr">MITRE</span>
+        <div class="fw-name">ATT&amp;CK Framework</div>
+        <div class="fw-context" data-en="Threat modelling & detection engineering" data-es="Modelado de amenazas e ingeniería de detección">Modelado de amenazas e ingeniería de detección</div>
+        <span class="fw-level" data-en="Advanced" data-es="Avanzado">Avanzado</span>
       </div>
       <div class="fw-item">
         <span class="fw-abbr">RGPD</span>
-        <div class="fw-details">
-          <div class="fw-name">Reglamento General de Protección de Datos</div>
-          <div class="fw-context" data-en="Full programme design &amp; implementation" data-es="Diseño e implantación integral">Diseño e implantación integral</div>
-        </div>
+        <div class="fw-name">Reglamento General de Protección de Datos</div>
+        <div class="fw-context" data-en="Full programme design & implementation" data-es="Diseño e implantación integral">Diseño e implantación integral</div>
         <span class="fw-level" data-en="Advanced" data-es="Avanzado">Avanzado</span>
       </div>
-
+      <div class="fw-item">
+        <span class="fw-abbr">NIS2</span>
+        <div class="fw-name">Network & Information Security Directive</div>
+        <div class="fw-context" data-en="EU directive — critical infrastructure" data-es="Directiva UE — infraestructuras críticas">Directiva UE — infraestructuras críticas</div>
+        <span class="fw-level" data-en="Proficient" data-es="Sólido">Sólido</span>
+      </div>
       <div class="fw-item">
         <span class="fw-abbr">ISO 31000</span>
-        <div class="fw-details">
-          <div class="fw-name" data-en="Risk Management Standard" data-es="Estándar de Gestión de Riesgos">Risk Management Standard</div>
-          <div class="fw-context" data-en="Enterprise risk governance" data-es="Gobernanza de riesgos empresariales">Gobernanza de riesgos empresariales</div>
-        </div>
+        <div class="fw-name" data-en="Risk Management Standard" data-es="Estándar de Gestión de Riesgos">Estándar de Gestión de Riesgos</div>
+        <div class="fw-context" data-en="Enterprise risk governance" data-es="Gobernanza de riesgos empresariales">Gobernanza de riesgos empresariales</div>
         <span class="fw-level" data-en="Proficient" data-es="Sólido">Sólido</span>
       </div>
     </div>
@@ -805,27 +735,27 @@ footer {
 <section id="education">
   <div class="section-inner">
     <div class="section-eyebrow" data-en="Academic background" data-es="Formación académica">Formación académica</div>
-    <h2 class="section-title" data-en="Education &amp; Training" data-es="Formación y Capacitación">Formación y Capacitación</h2>
+    <h2 class="section-title" data-en="Education & Training" data-es="Formación y Capacitación">Formación y Capacitación</h2>
     <div class="edu-grid">
       <div class="edu-card">
         <div class="edu-type" data-en="Master's Degree" data-es="Máster Universitario">Máster Universitario</div>
-        <div class="edu-degree" data-en="Master in Cybersecurity" data-es="Máster en Ciberseguridad">Máster en Ciberseguridad</div>
-        <div class="edu-school" data-en="University · Spain" data-es="Universidad · España">University · Spain</div>
+        <div class="edu-degree" data-en="Cybersecurity & Privacy" data-es="Ciberseguridad y Privacidad">Ciberseguridad y Privacidad</div>
+        <div class="edu-school">Universitat Oberta de Catalunya (UOC) · 2023–2025</div>
       </div>
       <div class="edu-card">
         <div class="edu-type" data-en="Bachelor's Degree" data-es="Grado Universitario">Grado Universitario</div>
-        <div class="edu-degree" data-en="Telecommunications Engineering" data-es="Ingeniería de Telecomunicaciones">Ingeniería de Telecomunicaciones</div>
-        <div class="edu-school" data-en="University · Spain" data-es="Universidad · España">University · Spain</div>
+        <div class="edu-degree" data-en="Telecommunications Systems Engineering" data-es="Ingeniería en Sistemas de Telecomunicación">Ingeniería en Sistemas de Telecomunicación</div>
+        <div class="edu-school">UCAM · 2013–2018 · Colegiado COITT nº 16542</div>
       </div>
       <div class="edu-card">
         <div class="edu-type" data-en="Military Training" data-es="Formación Militar">Formación Militar</div>
-        <div class="edu-degree" data-en="Defence &amp; Security Leadership" data-es="Liderazgo en Defensa y Seguridad">Liderazgo en Defensa y Seguridad</div>
+        <div class="edu-degree" data-en="Defence & Security Leadership" data-es="Liderazgo en Defensa y Seguridad">Liderazgo en Defensa y Seguridad</div>
         <div class="edu-school" data-en="Spanish Armed Forces · Officer Corps" data-es="Fuerzas Armadas Españolas · Cuerpo de Oficiales">Fuerzas Armadas Españolas · Cuerpo de Oficiales</div>
       </div>
       <div class="edu-card">
-        <div class="edu-type" data-en="Continuous Development" data-es="Formación Continua">Formación Continua</div>
-        <div class="edu-degree">ISO 27001 · ENS · MITRE ATT&amp;CK</div>
-        <div class="edu-school" data-en="Professional development in security frameworks" data-es="Desarrollo profesional en marcos de seguridad">Desarrollo profesional en marcos de seguridad</div>
+        <div class="edu-type" data-en="Certifications & Development" data-es="Certificaciones y Formación Continua">Certificaciones y Formación Continua</div>
+        <div class="edu-degree">Cisco Ethical Hacker · AI/ML · Aviónica</div>
+        <div class="edu-school" data-en="In progress: ISO 27001 Lead Auditor · CISM" data-es="En curso: ISO 27001 Lead Auditor · CISM">En curso: ISO 27001 Lead Auditor · CISM</div>
       </div>
     </div>
   </div>
@@ -853,11 +783,11 @@ footer {
           <span class="lang-flag">🇬🇧</span>
           <div>
             <div class="lang-name" data-en="English" data-es="Inglés">Inglés</div>
-            <div class="lang-level" data-en="Intermediate" data-es="Intermedio">Intermedio</div>
+            <div class="lang-level" data-en="Intermediate B2" data-es="Intermedio B2">Intermedio B2</div>
           </div>
         </div>
         <div class="lang-bar-bg"><div class="lang-bar" data-width="55"></div></div>
-        <div class="lang-cert">SLP 2.2.2.2 — Accredited</div>
+        <div class="lang-cert">SLP 2.2.2.2 — Acreditado</div>
       </div>
     </div>
   </div>
@@ -866,69 +796,62 @@ footer {
 <!-- TOOLS -->
 <section id="tools">
   <div class="section-inner">
-    <div class="section-eyebrow" data-en="Tools &amp; Platforms" data-es="Herramientas y Plataformas">Herramientas y Plataformas</div>
+    <div class="section-eyebrow" data-en="Tools & Platforms" data-es="Herramientas y Plataformas">Herramientas y Plataformas</div>
     <h2 class="section-title" data-en="Technical Toolset" data-es="Herramientas Técnicas">Herramientas Técnicas</h2>
-    <p class="section-sub"
-       data-en="Experiencia práctica con las principales herramientas de seguridad, gestión de riesgos y proyectos utilizadas en entornos GRC y SOC."
-       data-es="Experiencia práctica con las principales herramientas de seguridad, gestión de riesgos y proyectos utilizadas en entornos GRC y SOC.">
-      Experiencia práctica con las principales herramientas de seguridad, gestión de riesgos y proyectos utilizadas en entornos GRC y SOC.
-    </p>
+    <p class="section-sub" data-en="Hands-on experience with the main security, risk management and project tools used in GRC and SOC environments." data-es="Experiencia práctica con las principales herramientas de seguridad, gestión de riesgos y proyectos utilizadas en entornos GRC y SOC.">Experiencia práctica con las principales herramientas de seguridad, gestión de riesgos y proyectos utilizadas en entornos GRC y SOC.</p>
     <div class="tools-grid">
-
       <div class="tool-group">
         <div class="tool-group-title" data-en="CCN-CERT Tools" data-es="Herramientas CCN-CERT">Herramientas CCN-CERT</div>
         <div class="tool-list">
           <div class="tool-item">
             <div class="tool-name">PILAR</div>
-            <div class="tool-desc" data-en="Risk analysis &amp; management (ENS/MAGERIT methodology)" data-es="Análisis y gestión de riesgos (metodología ENS/MAGERIT)">Análisis y gestión de riesgos (metodología ENS/MAGERIT)</div>
+            <div class="tool-desc" data-en="Risk analysis & management (ENS/MAGERIT)" data-es="Análisis y gestión de riesgos (ENS/MAGERIT)">Análisis y gestión de riesgos (ENS/MAGERIT)</div>
           </div>
           <div class="tool-item">
             <div class="tool-name">INES / CLAUDIE</div>
-            <div class="tool-desc" data-en="ENS compliance self-assessment &amp; diagnosis" data-es="Autodiagnóstico y cumplimiento ENS">Autodiagnóstico y cumplimiento ENS</div>
+            <div class="tool-desc" data-en="ENS compliance self-assessment & diagnosis" data-es="Autodiagnóstico y cumplimiento ENS">Autodiagnóstico y cumplimiento ENS</div>
           </div>
           <div class="tool-item">
-            <div class="tool-name">LUCIA</div>
+            <div class="tool-name">LUCÍA</div>
             <div class="tool-desc" data-en="Security incident management" data-es="Gestión de incidentes de seguridad">Gestión de incidentes de seguridad</div>
           </div>
           <div class="tool-item">
             <div class="tool-name">CCN-STIC Guides</div>
-            <div class="tool-desc" data-en="Technical security guides &amp; compliance documentation" data-es="Guías técnicas de seguridad y documentación de cumplimiento">Guías técnicas de seguridad y documentación de cumplimiento</div>
+            <div class="tool-desc" data-en="Technical security guides & compliance documentation" data-es="Guías técnicas y documentación de cumplimiento">Guías técnicas y documentación de cumplimiento</div>
           </div>
         </div>
       </div>
-
       <div class="tool-group">
-        <div class="tool-group-title" data-en="SOC &amp; Security Platforms" data-es="Plataformas SOC y Seguridad">Plataformas SOC y Seguridad</div>
+        <div class="tool-group-title" data-en="SOC & Security Platforms" data-es="Plataformas SOC y Seguridad">Plataformas SOC y Seguridad</div>
         <div class="tool-list">
           <div class="tool-item">
             <div class="tool-name">Splunk</div>
-            <div class="tool-desc" data-en="SIEM — log analysis &amp; threat detection" data-es="SIEM — análisis de logs y detección de amenazas">SIEM — análisis de logs y detección de amenazas</div>
+            <div class="tool-desc" data-en="SIEM — log analysis & threat detection" data-es="SIEM — análisis de logs y detección de amenazas">SIEM — análisis de logs y detección de amenazas</div>
           </div>
           <div class="tool-item">
             <div class="tool-name">AlienVault OSSIM</div>
-            <div class="tool-desc" data-en="Open-source SIEM &amp; threat intelligence" data-es="SIEM open source e inteligencia de amenazas">SIEM open source e inteligencia de amenazas</div>
+            <div class="tool-desc" data-en="Open-source SIEM & threat intelligence" data-es="SIEM open source e inteligencia de amenazas">SIEM open source e inteligencia de amenazas</div>
+          </div>
+          <div class="tool-item">
+            <div class="tool-name">Wazuh</div>
+            <div class="tool-desc" data-en="Open-source SIEM/XDR — ENS environments" data-es="SIEM/XDR open source — entornos ENS">SIEM/XDR open source — entornos ENS</div>
           </div>
           <div class="tool-item">
             <div class="tool-name">Palo Alto NGFW</div>
             <div class="tool-desc" data-en="Next-generation firewall management" data-es="Gestión de firewall de nueva generación">Gestión de firewall de nueva generación</div>
           </div>
-          <div class="tool-item">
-            <div class="tool-name">VirtualBox / VMware</div>
-            <div class="tool-desc" data-en="Virtualisation environments for testing &amp; labs" data-es="Entornos de virtualización para pruebas y laboratorios">Entornos de virtualización para pruebas y laboratorios</div>
-          </div>
         </div>
       </div>
-
       <div class="tool-group">
-        <div class="tool-group-title" data-en="Project &amp; Management Tools" data-es="Herramientas de Gestión y Proyectos">Herramientas de Gestión y Proyectos</div>
+        <div class="tool-group-title" data-en="Project & Management Tools" data-es="Gestión y Productividad">Gestión y Productividad</div>
         <div class="tool-list">
           <div class="tool-item">
             <div class="tool-name">Microsoft Project</div>
-            <div class="tool-desc" data-en="Project planning &amp; programme management" data-es="Planificación de proyectos y gestión de programas">Planificación de proyectos y gestión de programas</div>
+            <div class="tool-desc" data-en="Project planning & programme management" data-es="Planificación de proyectos y programas">Planificación de proyectos y programas</div>
           </div>
           <div class="tool-item">
             <div class="tool-name">Trello</div>
-            <div class="tool-desc" data-en="Agile task &amp; team management" data-es="Gestión ágil de tareas y equipos">Gestión ágil de tareas y equipos</div>
+            <div class="tool-desc" data-en="Agile task & team management" data-es="Gestión ágil de tareas y equipos">Gestión ágil de tareas y equipos</div>
           </div>
           <div class="tool-item">
             <div class="tool-name">Microsoft Office 365</div>
@@ -940,7 +863,6 @@ footer {
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -951,34 +873,28 @@ footer {
     <div class="contact-left">
       <div class="section-eyebrow" data-en="Get in touch" data-es="Contacta conmigo">Contacta conmigo</div>
       <h2 class="section-title" data-en="Let's Work Together" data-es="Trabajemos Juntos">Trabajemos Juntos</h2>
-      <p class="section-sub"
-         data-en="Si buscas un líder en seguridad con disciplina militar y conocimiento técnico profundo, hablemos."
-         data-es="Si buscas un líder en seguridad con disciplina militar y conocimiento técnico profundo, hablemos.">
-        Si buscas un líder en seguridad con disciplina militar y conocimiento técnico profundo, hablemos.
-      </p>
+      <p class="section-sub" data-en="Looking for a cybersecurity consultant with military discipline and deep technical knowledge? Let's talk." data-es="Si buscas un consultor de ciberseguridad con disciplina militar y conocimiento técnico profundo, hablemos.">Si buscas un consultor de ciberseguridad con disciplina militar y conocimiento técnico profundo, hablemos.</p>
       <div class="contact-links">
-        <a href="/cdn-cgi/l/email-protection#2b52445e596b4e464a424705484446" class="contact-link">
+        <a href="mailto:pablomabe95@gmail.com" class="contact-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          <span class="__cf_email__" data-cfemail="abd2c4ded9ebcec6cac2c785c8c4c6">[email&#160;protected]</span>
+          pablomabe95@gmail.com
         </a>
         <a href="https://www.linkedin.com/in/pablomabe95" target="_blank" class="contact-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn Profile
+          linkedin.com/in/pablomabe95
         </a>
         <a href="cv/cv_pablo_martinez.pdf" download class="contact-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span data-en="Download CV" data-es="Descargar CV">Download CV</span>
+          <span data-en="Download CV (PDF)" data-es="Descargar CV (PDF)">Descargar CV (PDF)</span>
         </a>
-        <a href="https://github.com/YOUR_USERNAME" target="_blank" class="contact-link">
+        <a href="https://github.com/pmarbe3" target="_blank" class="contact-link">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          GitHub
+          github.com/pmarbe3
         </a>
       </div>
     </div>
     <div class="contact-right">
-      <p class="contact-quote"
-         data-en="&ldquo;La seguridad no es un producto, sino un proceso — y requiere un líder que comprenda tanto la profundidad técnica como la dimensión humana.&rdquo;"
-         data-es="&ldquo;La seguridad no es un producto, sino un proceso — y requiere un líder que comprenda tanto la profundidad técnica como la dimensión humana.&rdquo;">
+      <p class="contact-quote" data-en="&ldquo;Security is not a product, but a process — and it requires a leader who understands both the technical depth and the human dimension.&rdquo;" data-es="&ldquo;La seguridad no es un producto, sino un proceso — y requiere un líder que comprenda tanto la profundidad técnica como la dimensión humana.&rdquo;">
         &ldquo;La seguridad no es un producto, sino un proceso — y requiere un líder que comprenda tanto la profundidad técnica como la dimensión humana.&rdquo;
       </p>
       <div class="contact-quote-attr">— Bruce Schneier</div>
@@ -988,15 +904,11 @@ footer {
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-copy"
-       data-en="© 2025 Pablo Martínez Bernal — Todos los derechos reservados"
-       data-es="© 2025 Pablo Martínez Bernal — Todos los derechos reservados">
-    © 2025 Pablo Martínez Bernal — Todos los derechos reservados
-  </div>
+  <div class="footer-copy" data-en="© 2025 Pablo Martínez Bernal — All rights reserved" data-es="© 2025 Pablo Martínez Bernal — Todos los derechos reservados">© 2025 Pablo Martínez Bernal — Todos los derechos reservados</div>
   <div class="footer-built">Hosted on <span>GitHub Pages</span></div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js" defer></script><script>
+<script>
 /* NAV SCROLL */
 window.addEventListener('scroll', () => {
   document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
@@ -1005,9 +917,9 @@ window.addEventListener('scroll', () => {
 /* SCROLL ANIMATIONS */
 const obs = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
-    if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 70);
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 60);
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.05 });
 document.querySelectorAll('.tl-item,.exp-card,.fw-item,.edu-card,.lang-card').forEach(el => obs.observe(el));
 
 /* LANGUAGE BAR ANIMATION */
@@ -1028,4 +940,14 @@ function setLang(lang) {
   document.getElementById('btn-es').classList.toggle('active', lang === 'es');
   document.documentElement.lang = lang;
   document.querySelectorAll('[data-en][data-es]').forEach(el => {
-  
+    el.innerHTML = lang === 'en' ? el.dataset.en : el.dataset.es;
+  });
+  localStorage.setItem('lang', lang);
+}
+
+/* RESTORE LANGUAGE */
+const savedLang = localStorage.getItem('lang');
+if (savedLang && savedLang !== 'es') setLang(savedLang);
+</script>
+</body>
+</html>
