@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pablo Martínez Bernal — SOC Technical Lead · Incident Response</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy:   #0f1f3d;
+  --navy2:  #1a3260;
+  --accent: #1e5fa8;
+  --gold:   #c49a3c;
+  --cream:  #f9f7f4;
+  --white:  #ffffff;
+  --text:   #1a1a1a;
+  --muted:  #6b7280;
+  --border: #e5e7eb;
+  --light:  #f3f6fb;
+  --teal:   #0f6e56;
+  --teal-l: #e1f5ee;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+body {
+  background: var(--white);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--border); }
+::-webkit-scrollbar-thumb { background: var(--accent); }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.96);
+  border-bottom: 1px solid var(--border);
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 64px;
+  backdrop-filter: blur(12px);
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 2px 20px rgba(15,31,61,0.07); }
+.nav-logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.15rem; color: var(--navy);
+  text-decoration: none; letter-spacing: 0.2px;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  font-size: 0.75rem; letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--navy); }
+.nav-right { display: flex; align-items: center; gap: 20px; }
+.available-dot {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 0.7rem; letter-spacing: 1.2px; text-transform: uppercase;
+  color: #16a34a; font-weight: 500;
+}
+.dot {
+  width: 7px; height: 7px; background: #16a34a;
+  border-radius: 50%; animation: pulse 2.5s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(22,163,74,0.35); }
+  50%      { opacity:0.75; box-shadow: 0 0 0 5px rgba(22,163,74,0); }
+}
+.lang-toggle { display: flex; border: 1px solid var(--border); border-radius: 3px; overflow: hidden; }
+.lang-btn {
+  font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 5px 12px; border: none; background: transparent;
+  color: var(--muted); cursor: pointer; font-family: 'DM Sans', sans-serif;
+  font-weight: 500; transition: all 0.2s;
+}
+.lang-btn.active { background: var(--navy); color: var(--white); }
+.lang-btn:not(.active):hover { color: var(--navy); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 55% 45%;
+  padding-top: 64px;
+}
+.hero-left {
+  background: var(--navy);
+  padding: 88px 72px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.hero-left::after {
+  content: '';
+  position: absolute; bottom: 0; right: 0;
+  width: 240px; height: 240px;
+  background: linear-gradient(135deg, transparent 50%, rgba(30,95,168,0.12) 50%);
+}
+.hero-tag {
+  font-size: 0.68rem; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 14px;
+  animation: fadeUp 0.6s ease 0.15s both;
+}
+.hero-tag::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+.hero-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.6rem, 4vw, 4rem);
+  color: var(--white); line-height: 1.05;
+  margin-bottom: 24px;
+  animation: fadeUp 0.6s ease 0.3s both;
+}
+.hero-role {
+  font-size: 0.78rem; letter-spacing: 2.5px; text-transform: uppercase;
+  color: rgba(255,255,255,0.45); margin-bottom: 32px;
+  font-weight: 500; line-height: 2;
+  border-left: 2px solid var(--accent); padding-left: 16px;
+  animation: fadeUp 0.6s ease 0.45s both;
+}
+.hero-bio {
+  font-size: 0.97rem; color: rgba(255,255,255,0.7);
+  line-height: 1.9; margin-bottom: 48px; max-width: 440px;
+  animation: fadeUp 0.6s ease 0.6s both;
+}
+.hero-bio strong { color: rgba(255,255,255,0.95); font-weight: 500; }
+.hero-ctas {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  animation: fadeUp 0.6s ease 0.75s both;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 26px; background: var(--accent);
+  color: var(--white); font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: all 0.22s; border-radius: 2px;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-primary:hover { background: #1a4f8f; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(30,95,168,0.3); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 26px; background: transparent;
+  color: rgba(255,255,255,0.75); font-size: 0.75rem; font-weight: 500;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  text-decoration: none; border: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer; transition: all 0.22s; border-radius: 2px;
+  font-family: 'DM Sans', sans-serif;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+/* HERO RIGHT */
+.hero-right {
+  background: var(--light);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 64px 48px; gap: 32px;
+  animation: fadeIn 0.8s ease 0.4s both;
+}
+.photo-wrap { width: 280px; height: 360px; position: relative; }
+.photo-box {
+  width: 100%; height: 100%;
+  background: var(--white); border: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 12px; color: var(--muted);
+  font-size: 0.7rem; letter-spacing: 2px;
+  text-transform: uppercase; overflow: hidden; position: relative;
+}
+.photo-box img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  position: absolute; inset: 0;
+}
+.photo-wrap::before {
+  content: ''; position: absolute; top: -8px; left: -8px;
+  width: 48px; height: 48px;
+  border-top: 2px solid var(--accent); border-left: 2px solid var(--accent);
+}
+.photo-wrap::after {
+  content: ''; position: absolute; bottom: -8px; right: -8px;
+  width: 48px; height: 48px;
+  border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent);
+}
+.credentials { display: flex; flex-direction: column; gap: 8px; width: 280px; }
+.credential-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 14px;
+  background: var(--white); border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+}
+.credential-item svg { width: 14px; height: 14px; color: var(--accent); flex-shrink: 0; }
+.credential-text { font-size: 0.75rem; color: var(--navy); font-weight: 500; }
+
+/* ── SECTIONS ── */
+section { position: relative; }
+.section-inner { max-width: 1080px; margin: 0 auto; padding: 96px 64px; }
+.section-eyebrow {
+  font-size: 0.67rem; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 10px; font-weight: 600;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  color: var(--navy); line-height: 1.2; margin-bottom: 14px;
+}
+.section-sub {
+  font-size: 0.95rem; color: var(--muted);
+  max-width: 520px; line-height: 1.85; margin-bottom: 56px;
+}
+
+/* ── EXPERIENCE ── */
+#experience { background: var(--white); }
+.timeline { position: relative; padding-left: 24px; }
+.timeline::before {
+  content: ''; position: absolute;
+  left: 0; top: 8px; bottom: 0; width: 1px;
+  background: linear-gradient(to bottom, var(--accent), var(--border));
+}
+.tl-item {
+  position: relative; margin-bottom: 52px;
+  opacity: 0; transform: translateY(14px);
+  transition: all 0.5s ease;
+}
+.tl-item.visible { opacity: 1; transform: translateY(0); }
+.tl-dot {
+  position: absolute; left: -29px; top: 7px;
+  width: 10px; height: 10px;
+  background: var(--white); border: 2px solid var(--accent);
+  border-radius: 50%;
+}
+.tl-period {
+  font-size: 0.67rem; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 5px; font-weight: 600;
+}
+.tl-role {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.25rem; color: var(--navy); margin-bottom: 2px;
+}
+.tl-org { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; }
+.tl-desc { font-size: 0.93rem; color: var(--text); max-width: 640px; line-height: 1.85; margin-bottom: 14px; }
+.tl-desc strong { color: var(--navy); font-weight: 600; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase;
+  padding: 3px 10px; border: 1px solid var(--border);
+  color: var(--navy); background: var(--light);
+  border-radius: 2px; font-weight: 500;
+}
+.tag.hi { background: var(--teal-l); border-color: #9FE1CB; color: var(--teal); }
+
+/* ── EXPERTISE ── */
+#expertise { background: var(--cream); }
+.expertise-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.exp-card {
+  background: var(--white); padding: 32px 28px;
+  border: 1px solid var(--border);
+  border-top: 2px solid transparent;
+  opacity: 0; transform: translateY(14px);
+  transition: all 0.45s ease;
+}
+.exp-card.visible { opacity: 1; transform: translateY(0); }
+.exp-card:hover { border-top-color: var(--accent); box-shadow: 0 4px 20px rgba(15,31,61,0.06); }
+.exp-card.featured { border-top-color: var(--teal); }
+.exp-card.featured:hover { border-top-color: var(--teal); }
+.exp-icon { display: block; margin-bottom: 16px; color: var(--accent); }
+.exp-icon svg { width: 24px; height: 24px; stroke-width: 1.5; }
+.exp-card.featured .exp-icon { color: var(--teal); }
+.exp-name { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--navy); margin-bottom: 8px; }
+.exp-desc { font-size: 0.87rem; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+.exp-list { display: flex; flex-direction: column; gap: 5px; }
+.exp-item {
+  font-size: 0.78rem; color: var(--text);
+  padding: 4px 0 4px 12px;
+  border-left: 2px solid var(--border);
+  line-height: 1.5;
+}
+.exp-card.featured .exp-item { border-left-color: #9FE1CB; }
+
+/* ── STACK ── */
+#stack { background: var(--white); }
+.stack-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.stack-block {
+  padding: 28px 28px; border: 1px solid var(--border); background: var(--light);
+  opacity: 0; transform: translateY(12px); transition: all 0.45s ease;
+}
+.stack-block.visible { opacity: 1; transform: translateY(0); }
+.stack-block-title {
+  font-size: 0.67rem; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 18px; font-weight: 600;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 8px;
+}
+.stack-block-title svg { width: 13px; height: 13px; }
+.stack-tool { margin-bottom: 14px; }
+.stack-tool-name { font-size: 0.9rem; color: var(--navy); font-weight: 600; margin-bottom: 2px; }
+.stack-tool-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+.stack-tool-badge {
+  display: inline-block; margin-top: 4px;
+  font-size: 0.62rem; letter-spacing: 1.2px; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 2px; font-weight: 600;
+}
+.badge-ops { background: var(--teal-l); color: var(--teal); }
+.badge-ccn { background: #FAEEDA; color: #854F0B; }
+.badge-siem { background: #E6F1FB; color: #185FA5; }
+.badge-edr  { background: #EEEDFE; color: #534AB7; }
+
+/* ── FRAMEWORKS ── */
+#frameworks { background: var(--navy); }
+#frameworks .section-eyebrow { color: var(--gold); }
+#frameworks .section-eyebrow::before { background: var(--gold); }
+#frameworks .section-title { color: var(--white); }
+#frameworks .section-sub { color: rgba(255,255,255,0.5); }
+.fw-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.fw-item {
+  background: var(--navy); padding: 28px 24px;
+  display: flex; flex-direction: column; gap: 8px;
+  opacity: 0; transform: translateY(10px); transition: all 0.4s ease;
+}
+.fw-item.visible { opacity: 1; transform: translateY(0); }
+.fw-item:hover { background: var(--navy2); }
+.fw-abbr { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--gold); display: block; }
+.fw-name { font-size: 0.78rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
+.fw-context { font-size: 0.72rem; color: rgba(255,255,255,0.35); }
+.fw-level {
+  margin-top: 4px; font-size: 0.62rem; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--accent); font-weight: 600;
+  display: inline-block; padding: 2px 8px;
+  border: 1px solid rgba(30,95,168,0.4);
+}
+
+/* ── EDUCATION ── */
+#education { background: var(--cream); }
+.edu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.edu-card {
+  padding: 28px 28px; border: 1px solid var(--border); background: var(--white);
+  opacity: 0; transform: translateY(12px); transition: all 0.45s ease;
+}
+.edu-card.visible { opacity: 1; transform: translateY(0); }
+.edu-card:hover { box-shadow: 0 4px 20px rgba(15,31,61,0.06); }
+.edu-type {
+  font-size: 0.65rem; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 8px; font-weight: 600;
+}
+.edu-degree { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--navy); margin-bottom: 4px; }
+.edu-school { font-size: 0.82rem; color: var(--muted); }
+
+/* ── LANGUAGES ── */
+#languages { background: var(--white); }
+.lang-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 640px; }
+.lang-card {
+  background: var(--light); padding: 28px 28px;
+  border: 1px solid var(--border);
+  opacity: 0; transform: translateY(12px); transition: all 0.45s ease;
+}
+.lang-card.visible { opacity: 1; transform: translateY(0); }
+.lang-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.lang-flag { font-size: 1.6rem; }
+.lang-name { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--navy); }
+.lang-level { font-size: 0.75rem; color: var(--muted); }
+.lang-bar-bg { height: 2px; background: var(--border); margin-bottom: 10px; border-radius: 1px; }
+.lang-bar { height: 2px; background: var(--accent); width: 0; transition: width 1.2s ease; border-radius: 1px; }
+.lang-cert { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.5px; }
+
+/* ── CONTACT ── */
+#contact { background: var(--navy); }
+.contact-inner {
+  max-width: 1080px; margin: 0 auto; padding: 96px 64px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+#contact .section-eyebrow { color: var(--gold); }
+#contact .section-eyebrow::before { background: var(--gold); }
+#contact .section-title { color: var(--white); }
+#contact .section-sub { color: rgba(255,255,255,0.5); margin-bottom: 36px; }
+.contact-links { display: flex; flex-direction: column; gap: 10px; }
+.contact-link {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.87rem; color: rgba(255,255,255,0.65);
+  text-decoration: none; padding: 12px 16px;
+  border: 1px solid rgba(255,255,255,0.1); transition: all 0.2s;
+}
+.contact-link svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--gold); }
+.contact-link:hover { color: var(--white); border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.04); }
+.contact-quote {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.25rem; color: rgba(255,255,255,0.65);
+  line-height: 1.75; font-style: italic; margin-bottom: 20px;
+}
+.contact-quote-attr { font-size: 0.75rem; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; }
+
+/* ── FOOTER ── */
+footer {
+  background: #08111f; padding: 24px 64px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+.footer-built { font-size: 0.72rem; color: rgba(255,255,255,0.2); }
+.footer-built span { color: var(--accent); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+@media (max-width: 900px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding: 64px 32px; }
+  .section-inner { padding: 72px 32px; }
+  .expertise-grid { grid-template-columns: 1fr 1fr; }
+  .fw-grid { grid-template-columns: repeat(2, 1fr); }
+  .stack-grid { grid-template-columns: 1fr; }
+  .contact-inner { grid-template-columns: 1fr; gap: 48px; padding: 72px 32px; }
+  footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+}
+@media (max-width: 600px) {
+  .expertise-grid { grid-template-columns: 1fr; }
+  .fw-grid { grid-template-columns: 1fr 1fr; }
+  .edu-grid { grid-template-columns: 1fr; }
+  .lang-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#top">Pablo<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#experience" data-en="Experience" data-es="Experiencia">Experiencia</a></li>
+    <li><a href="#expertise"  data-en="Expertise"  data-es="Competencias">Competencias</a></li>
+    <li><a href="#stack"      data-en="Stack"       data-es="Stack">Stack</a></li>
+    <li><a href="#frameworks" data-en="Frameworks"  data-es="Frameworks">Frameworks</a></li>
+    <li><a href="#education"  data-en="Education"   data-es="Formación">Formación</a></li>
+    <li><a href="#contact"    data-en="Contact"     data-es="Contacto">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="available-dot">
+      <div class="dot"></div>
+      <span data-en="Open to work" data-es="Disponible">Disponible</span>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btn-es" onclick="setLang('es')">ES</button>
+      <button class="lang-btn"        id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-left">
+    <div class="hero-tag"
+         data-en="SOC Technical Lead · Incident Response"
+         data-es="SOC Technical Lead · Respuesta a Incidentes">
+      SOC Technical Lead · Respuesta a Incidentes
+    </div>
+    <h1 class="hero-name">Pablo Martínez<br>Bernal</h1>
+    <div class="hero-role"
+         data-en="Threat Hunting · SIEM · XDR · ENS · IR Hands-on"
+         data-es="Threat Hunting · SIEM · XDR · ENS · IR Hands-on">
+      Threat Hunting · SIEM · XDR · ENS · IR Hands-on
+    </div>
+    <p class="hero-bio"
+       data-en="Military officer and cybersecurity specialist with <strong>6+ years</strong> in high-demand environments. Currently <strong>SOC Lead at Spain's Joint Cyberspace Command</strong> — 50+ analysts, 24/7 operations, hands-on incident response and threat hunting over classified national defence networks."
+       data-es="Oficial de las FAS especializado en ciberseguridad con <strong>+6 años</strong> en entornos de alta exigencia operativa. Actualmente al frente del <strong>SOC del Mando Conjunto del Ciberespacio</strong> — +50 analistas, servicio 24/7, respuesta a incidentes hands-on y threat hunting sobre redes críticas de Defensa nacional.">
+      Oficial de las FAS especializado en ciberseguridad con <strong>+6 años</strong> en entornos de alta exigencia operativa. Actualmente al frente del <strong>SOC del Mando Conjunto del Ciberespacio</strong> — +50 analistas, servicio 24/7, respuesta a incidentes hands-on y threat hunting sobre redes críticas de Defensa nacional.
+    </p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">
+        <svg style="width:14px;height:14px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <span data-en="Get in Touch" data-es="Contactar">Contactar</span>
+      </a>
+      <a href="CV_Pablo_Martinez_SOC_Technical_Lead.pdf" download class="btn-outline">
+        <svg style="width:14px;height:14px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span data-en="Download CV" data-es="Descargar CV">Descargar CV</span>
+      </a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="photo-wrap">
+      <div class="photo-box">
+        <img src="img.jpeg" alt="Pablo Martínez Bernal"/>
+      </div>
+    </div>
+    <div class="credentials">
+      <div class="credential-item">
+        <svg style="width:14px;height:14px;color:var(--accent)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span class="credential-text" data-en="SOC Lead — MCCE · 50+ analysts" data-es="SOC Lead — MCCE · +50 analistas">SOC Lead — MCCE · +50 analistas</span>
+      </div>
+      <div class="credential-item">
+        <svg style="width:14px;height:14px;color:var(--accent)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <span class="credential-text" data-en="IR Lead · Threat Hunting · Forensics" data-es="IR Lead · Threat Hunting · Forense">IR Lead · Threat Hunting · Forense</span>
+      </div>
+      <div class="credential-item">
+        <svg style="width:14px;height:14px;color:var(--accent)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+        <span class="credential-text">Splunk · Cortex XDR · SentinelOne · ArcSight</span>
+      </div>
+      <div class="credential-item">
+        <svg style="width:14px;height:14px;color:var(--accent)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+        <span class="credential-text">CCN-CERT · Gloria · LUCÍA · MISP · ENS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-eyebrow" data-en="Career" data-es="Trayectoria">Trayectoria</div>
+    <h2 class="section-title" data-en="Professional Experience" data-es="Experiencia Profesional">Experiencia Profesional</h2>
+    <p class="section-sub"
+       data-en="Six years of progressively senior roles in cybersecurity, defence engineering and security operations."
+       data-es="Seis años en roles de responsabilidad creciente en ciberseguridad, ingeniería de defensa y operaciones de seguridad.">
+      Seis años en roles de responsabilidad creciente en ciberseguridad, ingeniería de defensa y operaciones de seguridad.
+    </p>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-period" data-en="Oct 2025 — Present" data-es="Oct 2025 — Actualidad">Oct 2025 — Actualidad</div>
+        <div class="tl-role" data-en="Head of Security Operations Centre (SOC)" data-es="Jefe de Centro de Operaciones de Seguridad (SOC)">Jefe de Centro de Operaciones de Seguridad (SOC)</div>
+        <div class="tl-org">Mando Conjunto del Ciberespacio (MCCE) · Fuerzas Armadas Españolas</div>
+        <p class="tl-desc"
+           data-en="Technical and operational lead of a 50+ analyst SOC with 24/7 operations over classified national Defence networks. Acts as <strong>IR Lead</strong> in critical incidents — hands-on detection, containment, endpoint forensics and IOC extraction with <strong>Splunk, ArcSight ESM, Cortex XDR and SentinelOne</strong>. Proactive threat hunting against APT TTPs using <strong>MISP</strong> and <strong>CCN-CERT</strong> feeds. Designs MITRE ATT&amp;CK-aligned use cases and manages the full CCN-CERT ecosystem (Gloria, LUCÍA, PILAR)."
+           data-es="Liderazgo técnico y operativo de un SOC de +50 analistas con servicio 24/7 sobre redes clasificadas de Defensa. Actúa como <strong>IR Lead</strong> en incidentes críticos — detección, contención, forense de endpoints y extracción de IOCs con <strong>Splunk, ArcSight ESM, Cortex XDR y SentinelOne</strong>. Threat hunting proactivo sobre TTPs de grupos APT activos en España usando feeds de <strong>MISP</strong> y <strong>CCN-CERT</strong>. Diseño de use cases alineados con MITRE ATT&amp;CK y gestión del ecosistema CCN-CERT (Gloria, LUCÍA, PILAR).">
+          Liderazgo técnico y operativo de un SOC de +50 analistas con servicio 24/7 sobre redes clasificadas de Defensa. Actúa como <strong>IR Lead</strong> en incidentes críticos — detección, contención, forense de endpoints y extracción de IOCs con <strong>Splunk, ArcSight ESM, Cortex XDR y SentinelOne</strong>. Threat hunting proactivo sobre TTPs de grupos APT activos en España usando feeds de <strong>MISP</strong> y <strong>CCN-CERT</strong>. Diseño de use cases alineados con MITRE ATT&CK y gestión del ecosistema CCN-CERT (Gloria, LUCÍA, PILAR).
+        </p>
+        <div class="tags">
+          <span class="tag hi">IR Lead</span>
+          <span class="tag hi">Threat Hunting</span>
+          <span class="tag hi">Splunk</span>
+          <span class="tag hi">Cortex XDR</span>
+          <span class="tag hi">SentinelOne</span>
+          <span class="tag hi">ArcSight ESM</span>
+          <span class="tag">ISO 27001</span>
+          <span class="tag">ENS</span>
+          <span class="tag">Gloria · LUCÍA · MISP</span>
+          <span class="tag">MITRE ATT&amp;CK</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-period" data-en="Oct 2023 — Oct 2025" data-es="Oct 2023 — Oct 2025">Oct 2023 — Oct 2025</div>
+        <div class="tl-role" data-en="Head of Aerial Platforms — Engineering Directorate" data-es="Jefe del Negociado de Plataformas Aéreas — Dirección de Ingeniería">Jefe del Negociado de Plataformas Aéreas — Dirección de Ingeniería</div>
+        <div class="tl-org">DIMALE · Mando de Apoyo Logístico del Ejército de Tierra</div>
+        <p class="tl-desc"
+           data-en="Technical direction of defence public contracts for helicopters and UAS. Led a team of ISDEFE engineers, authored technical requirements (PPT) and ensured compliance with PECAL and NATO standards. Managed international suppliers and validation programmes."
+           data-es="Dirección técnica de contratos públicos de defensa para helicópteros y UAS. Coordiné un equipo de ingenieros de ISDEFE, redacté pliegos de prescripciones técnicas (PPT) y garanticé el cumplimiento de normas PECAL y estándares OTAN. Gestión de proveedores internacionales y programas de validación.">
+          Dirección técnica de contratos públicos de defensa para helicópteros y UAS. Coordiné un equipo de ingenieros de ISDEFE, redacté pliegos de prescripciones técnicas (PPT) y garanticé el cumplimiento de normas PECAL y estándares OTAN. Gestión de proveedores internacionales y programas de validación.
+        </p>
+        <div class="tags">
+          <span class="tag">PECAL</span><span class="tag">Contratación Pública</span>
+          <span class="tag">Gestión de Equipos</span><span class="tag">OTAN</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-period" data-en="Aug 2020 — Oct 2023" data-es="Ago 2020 — Oct 2023">Ago 2020 — Oct 2023</div>
+        <div class="tl-role" data-en="Head of Quality" data-es="Jefe de Calidad">Jefe de Calidad</div>
+        <div class="tl-org">Batallón de Helicópteros de Maniobra III (BHELMA III)</div>
+        <p class="tl-desc"
+           data-en="Led 70+ personnel in HT-29 helicopter maintenance including international deployments (Mali). Implemented quality management system (ISO 9001, PECAL) integrating ISO/IEC 27001 and GDPR principles. Internal audits and external certification body liaison."
+           data-es="Dirigí más de 70 personas en mantenimiento del helicóptero HT-29, incluyendo despliegues internacionales (Mali). Implanté sistema de gestión de calidad (ISO 9001, PECAL) integrando principios de <strong>RGPD e ISO/IEC 27001</strong>. Auditorías internas y relación con organismos certificadores externos.">
+          Dirigí más de 70 personas en mantenimiento del helicóptero HT-29, incluyendo despliegues internacionales (Mali). Implanté sistema de gestión de calidad (ISO 9001, PECAL) integrando principios de <strong>RGPD e ISO/IEC 27001</strong>. Auditorías internas y relación con organismos certificadores externos.
+        </p>
+        <div class="tags">
+          <span class="tag">ISO 9001</span><span class="tag">PERAM</span>
+          <span class="tag">Auditoría Interna</span><span class="tag">RGPD</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="section-inner">
+    <div class="section-eyebrow" data-en="Capabilities" data-es="Capacidades">Capacidades</div>
+    <h2 class="section-title" data-en="Areas of Expertise" data-es="Áreas de Especialización">Áreas de Especialización</h2>
+    <p class="section-sub"
+       data-en="Technical and operational competencies built across real high-stakes environments."
+       data-es="Competencias técnicas y operativas desarrolladas en entornos reales de alta exigencia.">
+      Competencias técnicas y operativas desarrolladas en entornos reales de alta exigencia.
+    </p>
+    <div class="expertise-grid">
+
+      <div class="exp-card featured">
+        <span class="exp-icon"><svg style="width:24px;height:24px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+        <div class="exp-name" data-en="Incident Response" data-es="Respuesta a Incidentes">Respuesta a Incidentes</div>
+        <p class="exp-desc" data-en="Hands-on IR Lead in critical incidents over classified national infrastructure — detection, containment, forensics and remediation." data-es="IR Lead hands-on en incidentes críticos sobre infraestructuras nacionales clasificadas — detección, contención, forense y remediación.">IR Lead hands-on en incidentes críticos sobre infraestructuras nacionales clasificadas — detección, contención, forense y remediación.</p>
+        <div class="exp-list">
+          <span class="exp-item" data-en="SIEM-based detection & correlation" data-es="Detección y correlación en SIEM">Detección y correlación en SIEM</span>
+          <span class="exp-item" data-en="XDR/EDR pivoting & endpoint forensics" data-es="Pivoting XDR/EDR y forense de endpoints">Pivoting XDR/EDR y forense de endpoints</span>
+          <span class="exp-item" data-en="IOC extraction & MISP feed management" data-es="Extracción de IOCs y gestión de feeds MISP">Extracción de IOCs y gestión de feeds MISP</span>
+          <span class="exp-item" data-en="CCN-CERT notification via LUCÍA" data-es="Notificación CCN-CERT mediante LUCÍA">Notificación CCN-CERT mediante LUCÍA</span>
+        </div>
+      </div>
+
+      <div class="exp-card featured">
+        <span class="exp-icon"><svg style="width:24px;height:24px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+        <div class="exp-name" data-en="Threat Hunting" data-es="Threat Hunting">Threat Hunting</div>
+        <p class="exp-desc" data-en="Proactive hunting over SIEM historical telemetry, crossing APT TTPs with CCN-CERT and MISP intelligence to uncover undetected threats." data-es="Hunting proactivo sobre telemetría histórica del SIEM, cruzando TTPs de grupos APT con inteligencia CCN-CERT y MISP para identificar amenazas no detectadas.">Hunting proactivo sobre telemetría histórica del SIEM, cruzando TTPs de grupos APT con inteligencia CCN-CERT y MISP para identificar amenazas no detectadas.</p>
+        <div class="exp-list">
+          <span class="exp-item" data-en="MITRE ATT&CK-based hypothesis creation" data-es="Creación de hipótesis sobre MITRE ATT&CK">Creación de hipótesis sobre MITRE ATT&CK</span>
+          <span class="exp-item" data-en="SIEM advanced query & pivoting" data-es="Consulta avanzada y pivoting en SIEM">Consulta avanzada y pivoting en SIEM</span>
+          <span class="exp-item" data-en="APT profiling & TTP analysis" data-es="Perfilado de APT y análisis de TTPs">Perfilado de APT y análisis de TTPs</span>
+          <span class="exp-item" data-en="Integration with MISP & CCN-CERT feeds" data-es="Integración con feeds MISP y CCN-CERT">Integración con feeds MISP y CCN-CERT</span>
+        </div>
+      </div>
+
+      <div class="exp-card featured">
+        <span class="exp-icon"><svg style="width:24px;height:24px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></span>
+        <div class="exp-name" data-en="Detection Engineering" data-es="Ingeniería de Detección">Ingeniería de Detección</div>
+        <p class="exp-desc" data-en="Design and calibration of SIEM use cases aligned with MITRE ATT&CK, including UEBA-based rules, temporal correlation windows and iterative FP reduction." data-es="Diseño y calibración de use cases SIEM alineados con MITRE ATT&CK, incluyendo reglas UEBA, ventanas de correlación temporal y reducción iterativa de falsos positivos.">Diseño y calibración de use cases SIEM alineados con MITRE ATT&CK, incluyendo reglas UEBA, ventanas de correlación temporal y reducción iterativa de falsos positivos.</p>
+        <div class="exp-list">
+          <span class="exp-item" data-en="Multi-condition correlation rules" data-es="Reglas de correlación multicondición">Reglas de correlación multicondición</span>
+          <span class="exp-item" data-en="UEBA behavioural baselining" data-es="Baselines de comportamiento (UEBA)">Baselines de comportamiento (UEBA)</span>
+          <span class="exp-item" data-en="Iterative false-positive reduction" data-es="Reducción iterativa de falsos positivos">Reducción iterativa de falsos positivos</span>
+          <span class="exp-item" data-en="Playbooks for ransomware, lateral movement, insider threat" data-es="Playbooks para ransomware, movimiento lateral, insider threat">Playbooks para ransomware, movimiento lateral, insider threat</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <span class="exp-icon"><svg style="width:24px;height:24px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <div class="exp-name" data-en="GRC & Compliance" data-es="GRC y Cumplimiento">GRC y Cumplimiento</div>
+        <p class="exp-desc" data-en="Design and implementation of governance, risk and compliance frameworks in regulated and classified environments." data-es="Diseño e implantación de marcos de gobernanza, riesgo y cumplimiento en entornos regulados y clasificados.">Diseño e implantación de marcos de gobernanza, riesgo y cumplimiento en entornos regulados y clasificados.</p>
+        <div class="exp-list">
+          <span class="exp-item" data-en="ENS Cat. Media / Alta full lifecycle" data-es="ENS Cat. Media / Alta — ciclo completo">ENS Cat. Media / Alta — ciclo completo</span>
+          <span class="exp-item" data-en="ISO/IEC 27001 ISMS implementation & audit" data-es="Implantación y auditoría ISO/IEC 27001">Implantación y auditoría ISO/IEC 27001</span>
+          <span class="exp-item" data-en="MAGERIT v3 / PILAR risk analysis" data-es="Análisis de riesgos MAGERIT v3 / PILAR">Análisis de riesgos MAGERIT v3 / PILAR</span>
+          <span class="exp-item" data-en="NIS2 — critical infrastructure compliance" data-es="NIS2 — cumplimiento infraestructuras críticas">NIS2 — cumplimiento infraestructuras críticas</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <span class="exp-icon"><svg style="width:24px;height:24px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+        <div class="exp-name" data-en="SOC Leadership" data-es="Dirección de SOC">Dirección de SOC</div>
+        <p class="exp-desc" data-en="Technical and operational direction of 24/7 SOC teams, from analyst development to executive crisis communication." data-es="Dirección técnica y operativa de equipos SOC 24/7, desde el desarrollo de analistas hasta la comunicación ejecutiva en crisis.">Dirección técnica y operativa de equipos SOC 24/7, desde el desarrollo de analistas hasta la comunicación ejecutiva en crisis.</p>
+        <div class="exp-list">
+          <span class="exp-item" data-en="Team leadership 50+ analysts" data-es="Liderazgo de +50 analistas">Liderazgo de +50 analistas</span>
+          <span class="exp-item" data-en="KPI reporting — MTTD, MTTR, MITRE coverage" data-es="Reporting KPIs — MTTD, MTTR, cobertura MITRE">Reporting KPIs — MTTD, MTTR, cobertura MITRE</span>
+          <span class="exp-item" data-en="Analyst mentoring & technical development" data-es="Mentoría y desarrollo técnico de analistas">Mentoría y desarrollo técnico de analistas</span>
+          <span class="exp-item" data-en="Executive crisis communication" data-es="Comunicación ejecutiva en crisis">Comunicación ejecutiva en crisis</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <span class="exp-icon"><svg style="width:24px;height:24px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg></span>
+        <div class="exp-name" data-en="Technical Architecture" data-es="Arquitectura Técnica">Arquitectura Técnica</div>
+        <p class="exp-desc" data-en="Defence-grade security architectures, technical specifications and validation programmes for critical systems." data-es="Arquitecturas de seguridad de nivel defensa, especificaciones técnicas y programas de validación para sistemas críticos.">Arquitecturas de seguridad de nivel defensa, especificaciones técnicas y programas de validación para sistemas críticos.</p>
+        <div class="exp-list">
+          <span class="exp-item" data-en="Security controls design" data-es="Diseño de controles de seguridad">Diseño de controles de seguridad</span>
+          <span class="exp-item" data-en="Technical requirements (PPT) authoring" data-es="Redacción de pliegos técnicos (PPT)">Redacción de pliegos técnicos (PPT)</span>
+          <span class="exp-item" data-en="Test plan design & system validation" data-es="Planes de pruebas y validación de sistemas">Planes de pruebas y validación de sistemas</span>
+          <span class="exp-item" data-en="Infrastructure security review" data-es="Revisión de seguridad de infraestructuras">Revisión de seguridad de infraestructuras</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack">
+  <div class="section-inner">
+    <div class="section-eyebrow" data-en="Tools & Platforms" data-es="Herramientas y Plataformas">Herramientas y Plataformas</div>
+    <h2 class="section-title" data-en="Technical Stack" data-es="Stack Técnico">Stack Técnico</h2>
+    <p class="section-sub"
+       data-en="Hands-on experience with enterprise SIEM, XDR/EDR and the full CCN-CERT ecosystem in production environments."
+       data-es="Experiencia operativa con SIEM enterprise, XDR/EDR y el ecosistema completo CCN-CERT en entornos de producción.">
+      Experiencia operativa con SIEM enterprise, XDR/EDR y el ecosistema completo CCN-CERT en entornos de producción.
+    </p>
+    <div class="stack-grid">
+
+      <div class="stack-block">
+        <div class="stack-block-title">
+          <svg style="width:13px;height:13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span data-en="SIEM" data-es="SIEM">SIEM</span>
+        </div>
+        <div class="stack-tool">
+          <div class="stack-tool-name">Splunk</div>
+          <div class="stack-tool-desc" data-en="Log ingestion, correlation rules, advanced SPL queries, threat hunting and dashboards in production SOC" data-es="Ingesta de logs, reglas de correlación, consultas SPL avanzadas, threat hunting y dashboards en SOC de producción">Ingesta de logs, reglas de correlación, consultas SPL avanzadas, threat hunting y dashboards en SOC de producción</div>
+          <span class="stack-tool-badge badge-siem" data-en="Production" data-es="Producción">Producción</span>
+        </div>
+        <div class="stack-tool">
+          <div class="stack-tool-name">ArcSight ESM</div>
+          <div class="stack-tool-desc" data-en="Enterprise correlation engine — multi-condition rules, Active Lists, SmartConnectors and compliance reporting" data-es="Motor de correlación enterprise — reglas multicondición, Active Lists, SmartConnectors y reporting de cumplimiento">Motor de correlación enterprise — reglas multicondición, Active Lists, SmartConnectors y reporting de cumplimiento</div>
+          <span class="stack-tool-badge badge-siem" data-en="Production" data-es="Producción">Producción</span>
+        </div>
+        <div class="stack-tool">
+          <div class="stack-tool-name">AlienVault OSSIM · Wazuh · Microsoft Sentinel</div>
+          <div class="stack-tool-desc" data-en="Open source and cloud SIEM — log correlation, ENS environments and hybrid monitoring" data-es="SIEM open source y cloud — correlación de logs, entornos ENS y monitorización híbrida">SIEM open source y cloud — correlación de logs, entornos ENS y monitorización híbrida</div>
+          <span class="stack-tool-badge badge-siem" data-en="Operational" data-es="Operacional">Operacional</span>
+        </div>
+      </div>
+
+      <div class="stack-block">
+        <div class="stack-block-title">
+          <svg style="width:13px;height:13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <span data-en="XDR / EDR" data-es="XDR / EDR">XDR / EDR</span>
+        </div>
+        <div class="stack-tool">
+          <div class="stack-tool-name">Cortex XDR — Palo Alto Networks</div>
+          <div class="stack-tool-desc" data-en="Full IR cycle: endpoint investigation, lateral movement analysis, IOC extraction and automated response" data-es="Ciclo completo de IR: investigación de endpoint, análisis de movimiento lateral, extracción de IOCs y respuesta automatizada">Ciclo completo de IR: investigación de endpoint, análisis de movimiento lateral, extracción de IOCs y respuesta automatizada</div>
+          <span class="stack-tool-badge badge-edr" data-en="IR Hands-on" data-es="IR Hands-on">IR Hands-on</span>
+        </div>
+        <div class="stack-tool">
+          <div class="stack-tool-name">SentinelOne</div>
+          <div class="stack-tool-desc" data-en="Signatureless detection, autonomous response, endpoint isolation and post-infection rollback in critical environments" data-es="Detección sin firmas, respuesta autónoma, aislamiento de endpoint y rollback post-infección en entornos críticos">Detección sin firmas, respuesta autónoma, aislamiento de endpoint y rollback post-infección en entornos críticos</div>
+          <span class="stack-tool-badge badge-edr" data-en="IR Hands-on" data-es="IR Hands-on">IR Hands-on</span>
+        </div>
+      </div>
+
+      <div class="stack-block">
+        <div class="stack-block-title">
+          <svg style="width:13px;height:13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>
+          <span data-en="CCN-CERT Ecosystem" data-es="Ecosistema CCN-CERT">Ecosistema CCN-CERT</span>
+        </div>
+        <div class="stack-tool">
+          <div class="stack-tool-name">Gloria</div>
+          <div class="stack-tool-desc" data-en="SOC monitoring platform for ENS environments — centralised detection and correlation for public sector" data-es="Plataforma de monitorización SOC para entornos ENS — detección y correlación centralizada para el sector público">Plataforma de monitorización SOC para entornos ENS — detección y correlación centralizada para el sector público</div>
+          <span class="stack-tool-badge badge-ccn">CCN-CERT</span>
+        </div>
+        <div class="stack-tool">
+          <div class="stack-tool-name">LUCÍA · MISP · PILAR · INES</div>
+          <div class="stack-tool-desc" data-en="Incident notification (LUCÍA), threat intelligence exchange (MISP), risk analysis (PILAR) and ENS compliance (INES) — daily operational use" data-es="Notificación de incidentes (LUCÍA), intercambio de inteligencia (MISP), análisis de riesgos (PILAR) y cumplimiento ENS (INES) — uso operativo diario">Notificación de incidentes (LUCÍA), intercambio de inteligencia (MISP), análisis de riesgos (PILAR) y cumplimiento ENS (INES) — uso operativo diario</div>
+          <span class="stack-tool-badge badge-ccn">CCN-CERT</span>
+        </div>
+      </div>
+
+      <div class="stack-block">
+        <div class="stack-block-title">
+          <svg style="width:13px;height:13px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span data-en="Frameworks & Methods" data-es="Marcos y Metodologías">Marcos y Metodologías</span>
+        </div>
+        <div class="stack-tool">
+          <div class="stack-tool-name">MITRE ATT&CK</div>
+          <div class="stack-tool-desc" data-en="Detection engineering, TTP-based threat hunting and coverage gap analysis" data-es="Ingeniería de detección, threat hunting basado en TTPs y análisis de gaps de cobertura">Ingeniería de detección, threat hunting basado en TTPs y análisis de gaps de cobertura</div>
+          <span class="stack-tool-badge badge-ops" data-en="Advanced" data-es="Avanzado">Avanzado</span>
+        </div>
+        <div class="stack-tool">
+          <div class="stack-tool-name">ENS · ISO/IEC 27001 · NIST CSF · MAGERIT v3</div>
+          <div class="stack-tool-desc" data-en="Regulatory frameworks applied in classified and critical infrastructure environments" data-es="Marcos regulatorios aplicados en entornos clasificados e infraestructuras críticas">Marcos regulatorios aplicados en entornos clasificados e infraestructuras críticas</div>
+          <span class="stack-tool-badge badge-ops" data-en="Applied" data-es="Aplicado">Aplicado</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FRAMEWORKS -->
+<section id="frameworks">
+  <div class="section-inner">
+    <div class="section-eyebrow" data-en="Standards" data-es="Estándares">Estándares</div>
+    <h2 class="section-title" data-en="Frameworks & Standards" data-es="Marcos y Estándares">Marcos y Estándares</h2>
+    <p class="section-sub"
+       data-en="Deep applied knowledge of the main national and international security and detection frameworks."
+       data-es="Conocimiento profundo y aplicado de los principales marcos de seguridad y detección nacionales e internacionales.">
+      Conocimiento profundo y aplicado de los principales marcos de seguridad y detección nacionales e internacionales.
+    </p>
+    <div class="fw-grid">
+      <div class="fw-item">
+        <span class="fw-abbr">MITRE</span>
+        <div class="fw-name">ATT&amp;CK Framework</div>
+        <div class="fw-context" data-en="Detection engineering & threat hunting" data-es="Ingeniería de detección y threat hunting">Ingeniería de detección y threat hunting</div>
+        <span class="fw-level" data-en="Advanced" data-es="Avanzado">Avanzado</span>
+      </div>
+      <div class="fw-item">
+        <span class="fw-abbr">ENS</span>
+        <div class="fw-name">Esquema Nacional de Seguridad</div>
+        <div class="fw-context" data-en="Cat. Media / Alta — full lifecycle" data-es="Cat. Media / Alta — ciclo completo">Cat. Media / Alta — ciclo completo</div>
+        <span class="fw-level" data-en="Advanced" data-es="Avanzado">Avanzado</span>
+      </div>
+      <div class="fw-item">
+        <span class="fw-abbr">ISO 27001</span>
+        <div class="fw-name">Information Security Management</div>
+        <div class="fw-context" data-en="ISMS design, implementation & audit" data-es="Diseño, implantación y auditoría SGSI">Diseño, implantación y auditoría SGSI</div>
+        <span class="fw-level" data-en="Advanced" data-es="Avanzado">Avanzado</span>
+      </div>
+      <div class="fw-item">
+        <span class="fw-abbr">NIST</span>
+        <div class="fw-name">Cybersecurity Framework 2.0</div>
+        <div class="fw-context" data-en="Risk management & security posture" data-es="Gestión de riesgos y postura de seguridad">Gestión de riesgos y postura de seguridad</div>
+        <span class="fw-level" data-en="Proficient" data-es="Sólido">Sólido</span>
+      </div>
+      <div class="fw-item">
+        <span class="fw-abbr">MAGERIT</span>
+        <div class="fw-name">Metodología Análisis de Riesgos</div>
+        <div class="fw-context" data-en="v3 — PILAR tool applied" data-es="v3 — herramienta PILAR aplicada">v3 — herramienta PILAR aplicada</div>
+        <span class="fw-level" data-en="Advanced" data-es="Avanzado">Avanzado</span>
+      </div>
+      <div class="fw-item">
+        <span class="fw-abbr">NIS2</span>
+        <div class="fw-name">Network &amp; Information Security</div>
+        <div class="fw-context" data-en="Critical infrastructure operators" data-es="Operadores de infraestructuras críticas">Operadores de infraestructuras críticas</div>
+        <span class="fw-level" data-en="Proficient" data-es="Sólido">Sólido</span>
+      </div>
+      <div class="fw-item">
+        <span class="fw-abbr">RGPD</span>
+        <div class="fw-name">Reglamento General Protección Datos</div>
+        <div class="fw-context" data-en="DPA, breach notification, EIPD" data-es="DPA, notificación brechas, EIPD">DPA, notificación brechas, EIPD</div>
+        <span class="fw-level" data-en="Advanced" data-es="Avanzado">Avanzado</span>
+      </div>
+      <div class="fw-item">
+        <span class="fw-abbr">ISO 31000</span>
+        <div class="fw-name">Risk Management Standard</div>
+        <div class="fw-context" data-en="Enterprise risk governance" data-es="Gobernanza de riesgos empresariales">Gobernanza de riesgos empresariales</div>
+        <span class="fw-level" data-en="Proficient" data-es="Sólido">Sólido</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-eyebrow" data-en="Academic background" data-es="Formación académica">Formación académica</div>
+    <h2 class="section-title" data-en="Education & Certifications" data-es="Formación y Certificaciones">Formación y Certificaciones</h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-type" data-en="Master's Degree" data-es="Máster Universitario">Máster Universitario</div>
+        <div class="edu-degree" data-en="Cybersecurity & Privacy" data-es="Ciberseguridad y Privacidad">Ciberseguridad y Privacidad</div>
+        <div class="edu-school">Universitat Oberta de Catalunya (UOC) · 2023–2025</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-type" data-en="Bachelor's Degree" data-es="Grado Universitario">Grado Universitario</div>
+        <div class="edu-degree" data-en="Telecommunications Systems Engineering" data-es="Ingeniería en Sistemas de Telecomunicación">Ingeniería en Sistemas de Telecomunicación</div>
+        <div class="edu-school">UCAM · 2013–2018 · Colegiado COITT nº 16542</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-type" data-en="Certifications" data-es="Certificaciones">Certificaciones</div>
+        <div class="edu-degree">Cisco Ethical Hacker · AI/ML (120h)</div>
+        <div class="edu-school" data-en="In progress: ISO 27001 Lead Implementer · GCIH · NSE 4" data-es="En curso: ISO 27001 Lead Implementer · GCIH · NSE 4">En curso: ISO 27001 Lead Implementer · GCIH · NSE 4</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-type" data-en="CCN-CERT Training" data-es="Formación CCN-CERT">Formación CCN-CERT</div>
+        <div class="edu-degree">Gloria · LUCÍA · MISP · PILAR · INES</div>
+        <div class="edu-school" data-en="Operational training — CCN-CERT ecosystem" data-es="Formación operativa — ecosistema CCN-CERT">Formación operativa — ecosistema CCN-CERT</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section id="languages">
+  <div class="section-inner">
+    <div class="section-eyebrow" data-en="Communication" data-es="Comunicación">Comunicación</div>
+    <h2 class="section-title" data-en="Languages" data-es="Idiomas">Idiomas</h2>
+    <div class="lang-grid">
+      <div class="lang-card">
+        <div class="lang-header">
+          <span class="lang-flag">🇪🇸</span>
+          <div>
+            <div class="lang-name" data-en="Spanish" data-es="Español">Español</div>
+            <div class="lang-level" data-en="Native" data-es="Nativo">Nativo</div>
+          </div>
+        </div>
+        <div class="lang-bar-bg"><div class="lang-bar" data-width="100"></div></div>
+        <div class="lang-cert" data-en="Mother tongue" data-es="Lengua materna">Lengua materna</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-header">
+          <span class="lang-flag">🇬🇧</span>
+          <div>
+            <div class="lang-name" data-en="English" data-es="Inglés">Inglés</div>
+            <div class="lang-level" data-en="Intermediate B2" data-es="Intermedio B2">Intermedio B2</div>
+          </div>
+        </div>
+        <div class="lang-bar-bg"><div class="lang-bar" data-width="55"></div></div>
+        <div class="lang-cert" data-en="SLP 2.2.2.2 · Technical use in NATO environments" data-es="SLP 2.2.2.2 · Uso técnico en entornos OTAN y despliegues internacionales">SLP 2.2.2.2 · Uso técnico en entornos OTAN y despliegues internacionales</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="section-eyebrow" data-en="Get in touch" data-es="Contacta conmigo">Contacta conmigo</div>
+      <h2 class="section-title" data-en="Let's Work Together" data-es="Trabajemos Juntos">Trabajemos Juntos</h2>
+      <p class="section-sub"
+         data-en="Looking for a SOC Technical Lead with real hands-on IR experience and deep knowledge of the CCN-CERT ecosystem? Let's talk."
+         data-es="Si buscas un SOC Technical Lead con experiencia real en IR hands-on y conocimiento profundo del ecosistema CCN-CERT, hablemos.">
+        Si buscas un SOC Technical Lead con experiencia real en IR hands-on y conocimiento profundo del ecosistema CCN-CERT, hablemos.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:pablomabe95@gmail.com" class="contact-link">
+          <svg style="width:16px;height:16px;flex-shrink:0;color:var(--gold)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          pablomabe95@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/pablomabe95" target="_blank" class="contact-link">
+          <svg style="width:16px;height:16px;flex-shrink:0;color:var(--gold)" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+          linkedin.com/in/pablomabe95
+        </a>
+        <a href="CV_Pablo_Martinez_SOC_Technical_Lead.pdf" download class="contact-link">
+          <svg style="width:16px;height:16px;flex-shrink:0;color:var(--gold)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+          <span data-en="Download CV (PDF)" data-es="Descargar CV (PDF)">Descargar CV (PDF)</span>
+        </a>
+        <a href="https://github.com/pmarbe3" target="_blank" class="contact-link">
+          <svg style="width:16px;height:16px;flex-shrink:0;color:var(--gold)" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+          github.com/pmarbe3
+        </a>
+      </div>
+    </div>
+    <div class="contact-right">
+      <p class="contact-quote"
+         data-en="&ldquo;The best security professionals are those who think like attackers and act like defenders — and know exactly when to do each.&rdquo;"
+         data-es="&ldquo;Los mejores profesionales de seguridad son los que piensan como atacantes y actúan como defensores — y saben exactamente cuándo hacer cada cosa.&rdquo;">
+        &ldquo;Los mejores profesionales de seguridad son los que piensan como atacantes y actúan como defensores — y saben exactamente cuándo hacer cada cosa.&rdquo;
+      </p>
+      <div class="contact-quote-attr">— Bruce Schneier</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy" data-en="© 2025 Pablo Martínez Bernal — All rights reserved" data-es="© 2025 Pablo Martínez Bernal — Todos los derechos reservados">© 2025 Pablo Martínez Bernal — Todos los derechos reservados</div>
+  <div class="footer-built">Hosted on <span>GitHub Pages</span></div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 60);
+  });
+}, { threshold: 0.05 });
+document.querySelectorAll('.tl-item,.exp-card,.fw-item,.edu-card,.lang-card,.stack-block').forEach(el => obs.observe(el));
+
+const barObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.lang-bar').forEach(bar => {
+        bar.style.width = bar.dataset.width + '%';
+      });
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.lang-card').forEach(el => barObs.observe(el));
+
+function setLang(lang) {
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-en][data-es]').forEach(el => {
+    el.innerHTML = lang === 'en' ? el.dataset.en : el.dataset.es;
+  });
+  localStorage.setItem('lang', lang);
+}
+
+const savedLang = localStorage.getItem('lang');
+if (savedLang && savedLang !== 'es') setLang(savedLang);
+
+</script>
+</body>
+</html>
